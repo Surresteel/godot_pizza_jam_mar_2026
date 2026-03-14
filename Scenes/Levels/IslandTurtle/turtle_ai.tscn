@@ -1,18 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5pdnqaed8v21"]
+[gd_scene load_steps=5 format=3 uid="uid://c5pdnqaed8v21"]
 
 [ext_resource type="Script" uid="uid://biu1dgyclxvhw" path="res://Scripts/IslandTurtle/turtle_ai.gd" id="1_xtbmg"]
-[ext_resource type="Material" uid="uid://fvhluu5puhyh" path="res://Materials/IslandTurtle/mat_turtle_ai.tres" id="2_18ody"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_eyyl6"]
-material = ExtResource("2_18ody")
-radius = 0.15
-height = 0.15
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ylex2"]
-material = ExtResource("2_18ody")
-top_radius = 0.025
-bottom_radius = 0.025
-height = 0.15
+[ext_resource type="PackedScene" uid="uid://vx6xgkpfshpn" path="res://blends/TurtleRigged.blend" id="2_mfbg6"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ylex2"]
 height = 0.15
@@ -27,14 +16,8 @@ collision_layer = 8
 collision_mask = 25
 script = ExtResource("1_xtbmg")
 
-[node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
-mesh = SubResource("SphereMesh_eyyl6")
-
-[node name="Head" type="MeshInstance3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, 0.14551322, 0.9893563, 0, -0.9893563, 0.14551322, 0, 0.010584608, -0.14668736)
-mesh = SubResource("CylinderMesh_ylex2")
-skeleton = NodePath("../..")
+[node name="TurtleRigged" parent="." instance=ExtResource("2_mfbg6")]
+transform = Transform3D(-0.4, 0, -3.4969112e-08, 0, 0.4, 0, 3.4969112e-08, 0, -0.4, 0, 0, 0)
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
