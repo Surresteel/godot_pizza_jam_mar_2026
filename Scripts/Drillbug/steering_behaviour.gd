@@ -1,13 +1,25 @@
 extends Node3D
 class_name SteeringBehaviour
 
-@export var max_speed: float
-@export var max_force: float
+
+@export var path_radius: float = 0.5
+@export var desired_seperation: float = 0.25
+
+var max_speed: float
+var max_force: float
+
 var steering_line = ImmediateMesh.new()
 var velocity_line = ImmediateMesh.new()
 var seperation_line = ImmediateMesh.new()
 var path_line = ImmediateMesh.new()
 var material := preload("uid://djflvx1tyl8nn")
+
+var normalnew = MeshInstance3D.new()
+var futuresphere = MeshInstance3D.new()
+var sphere = SphereMesh.new()
+var actualPath = ImmediateMesh.new()
+
+var failsafe = false
 
 func set_defaults(speed, force) -> void:
 	max_speed = speed
@@ -26,41 +38,65 @@ func _get_desired_velocity(target: Vector3) -> Vector3:
 
 
 ## Path Following
-func get_future_pos(velocity: Vector3, Length: float = 0.3) -> Vector3:
+func get_future_pos(velocity: Vector3, Length: float = 0.15) -> Vector3:
 	return global_position + velocity.normalized() * Length
 
 func get_normal_from_path(start_pos: Vector3, end_pos: Vector3, future_pos: Vector3) -> Vector3:
 	var a: Vector3 = future_pos - start_pos
 	var b: Vector3 = end_pos - start_pos
-	var theta = a.angle_to(b)
-	
-	var d: float = a.length() * cos(theta)
-	b = b.normalized() * d
+	b = b.normalized()
+	b = b * (a.dot(b))
 	return start_pos + b
 
 
 func follow_path(current_velcoity: Vector3, start_pos: Vector3, end_pos: Vector3, length: float) -> Vector3:
+	#
+	#if failsafe:
+		#return Vector3.ZERO
 	
 	var future_pos:= get_future_pos(current_velcoity)
 	var normal_pos:= get_normal_from_path(start_pos,end_pos,future_pos)
 	
+	#debugging
+	#actualPath.clear_surfaces()
+	#material.albedo_color = Color.REBECCA_PURPLE
+	#actualPath.surface_begin(Mesh.PRIMITIVE_LINES, material)
+	#actualPath.surface_set_color(Color.REBECCA_PURPLE)
+	#actualPath.surface_add_vertex(start_pos)
+	#actualPath.surface_set_color(Color.REBECCA_PURPLE)
+	#actualPath.surface_add_vertex(end_pos)
+	#actualPath.surface_end()
+	#
+	#normalnew.mesh = sphere
+	#normalnew.position = normal_pos
+	#sphere.radius = 0.005
+	#sphere.height = sphere.radius*2
+	#
+	#futuresphere.mesh = SphereMesh.new()
+	#futuresphere.mesh.radius = 0.005
+	#futuresphere.mesh.height = sphere.radius*2
+	#futuresphere.position = future_pos
+	#var mat1 := StandardMaterial3D.new()
+	#futuresphere.mesh.material = mat1
+	#mat1.albedo_color = Color.REBECCA_PURPLE
+	#debugging end
 	
 	var distance = future_pos.distance_to(normal_pos)
-	if distance > 1: #path radius, change if needed
-		var target_pos := (end_pos - start_pos).normalized() * length
+	if distance > path_radius: #path radius, change if needed
+		print(distance)
+		var target_pos := (normal_pos + ((end_pos - start_pos).normalized() * length))
 		
-		var steer := target_pos - current_velcoity
+		var steer := target_pos - global_position# - current_velcoity
 		steer.limit_length(max_force)
 		_render_line(steer,path_line,Color.BLACK)
+		failsafe = true
 		return steer
 	else:
-		path_line.clear_surfaces()
-		return Vector3.ZERO
+		return Vector3.ZERO#get_steering_force(end_pos,current_velcoity)
 
 
 ## seperation
 func seperate(drillbugs: Array[DrillBug], current_velcoity: Vector3) -> Vector3:
-	var desired_seperation := 0.15
 	
 	var amount: int = 0
 	var sum: Vector3 = Vector3.ZERO
@@ -87,27 +123,25 @@ func seperate(drillbugs: Array[DrillBug], current_velcoity: Vector3) -> Vector3:
 
 ## Debuging
 func _ready() -> void:
-	var steer_mesh = MeshInstance3D.new()
-	steer_mesh.mesh = steering_line
-	steer_mesh.cast_shadow = false
-	get_tree().get_root().add_child.call_deferred(steer_mesh)
+	create_line(steering_line)
 	
-	var velo_mesh = MeshInstance3D.new()
-	velo_mesh.mesh = velocity_line
-	velo_mesh.cast_shadow = false
-	get_tree().get_root().add_child.call_deferred(velo_mesh)
+	create_line(velocity_line)
 	
-	var sepe_mesh = MeshInstance3D.new()
-	sepe_mesh.mesh = seperation_line
-	sepe_mesh.cast_shadow = false
-	get_tree().get_root().add_child.call_deferred(sepe_mesh)
+	create_line(seperation_line)
 	
-	var path_mesh = MeshInstance3D.new()
-	path_mesh.mesh = path_line
-	path_mesh.cast_shadow = false
-	get_tree().get_root().add_child.call_deferred(path_mesh)
+	create_line(path_line)
+	create_line(actualPath)
+	get_tree().get_root().add_child.call_deferred(normalnew)
+	get_tree().get_root().add_child.call_deferred(futuresphere)
+
+func create_line(line):
+	var mesh = MeshInstance3D.new()
+	mesh.mesh = line
+	mesh.cast_shadow = false
+	get_tree().get_root().add_child.call_deferred(mesh)
 
 func _render_line(target_pos: Vector3, line: ImmediateMesh, colour: Color) -> void:
+	return
 	line.clear_surfaces()
 	material.albedo_color = colour
 	

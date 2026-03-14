@@ -46,15 +46,14 @@ func _ready() -> void:
 	aceleration = randf_range(0.66,3)
 	max_speed = speed
 	steering_behaviour.set_defaults(speed,aceleration)
-	velocity = Vector3(0,0,-1)
 
 func _physics_process(delta: float) -> void:
 	if !racing:
 		return
 	#steering to the next waypoint
-	#velocity += steering_behaviour.get_steering_force(
-				#race_waypoints[current_waypoint].global_position, velocity
-				#) * delta
+	velocity += steering_behaviour.get_steering_force(
+				race_waypoints[current_waypoint].global_position, velocity
+				) * delta
 	
 	#steering to stay aligned with an arbitary path
 	var start_pos := race_waypoints[(current_waypoint-1+14)%14].global_position
@@ -63,7 +62,7 @@ func _physics_process(delta: float) -> void:
 	velocity += steering_behaviour.follow_path(velocity, start_pos,end_pos,length) * delta
 	
 	#steering to avoid other drillbugs
-	#velocity += steering_behaviour.seperate(drillbugs,velocity) * delta
+	velocity += steering_behaviour.seperate(drillbugs,velocity) * delta
 	
 	velocity.limit_length(speed)
 	
