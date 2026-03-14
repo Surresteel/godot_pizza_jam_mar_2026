@@ -20,32 +20,9 @@ var mass: float = 5.0
 
 # MOVEMENT:
 var allow_move: bool = true
+var turn_rate: float = 3.0
 var acceleration: float = 1.5
 var speed: float = 0.5
-var mouse_intercept := Vector3.ZERO
-
-
-#===============================================================================
-#	CALLBACKS:
-#===============================================================================
-
-# Initialise node:
-func _ready() -> void:
-	area.body_entered.connect(_on_body_entered)
-
-
-# Update node:
-func _physics_process(delta: float) -> void:
-	_update_mouse_intercept()
-	_update_direction()
-	_update_velocity(delta)
-	_dampen_movement(delta)
-	_apply_gravity(delta)
-	
-	if not pending_collision.is_zero_approx():
-		_apply_pending_collision()
-	
-	move_and_slide()
 
 
 #===============================================================================
@@ -64,49 +41,13 @@ func _apply_gravity(delta: float) -> void:
 	return
 
 # Handles the turtle's looking direction:
-func _update_direction() -> void:
-	# GATE - turtle must be on floor to look around:
-	if not is_on_floor():
-		return
-	
-	# Calculate new basis:
-	var pos = mouse_intercept - global_position
-	var floor_norm: Vector3 = get_floor_normal()
-	#var new_basis: Basis = Basis.looking_at(mouse_intercept, floor_norm)
-	var new_basis: Basis = Basis.looking_at(pos, floor_norm)
-	
-	# Apply new basis:
-	transform.basis = new_basis
-	
-	return
-
-
-# Updates the mouse intercept point with the environment collision layer:
-func _update_mouse_intercept() -> void:
-	# Get mouse screen position:
-	var mouse_pos := get_viewport().get_mouse_position()
-	
-	# Get ray start and end:
-	var camera : Camera3D = get_viewport().get_camera_3d()
-	var ray_origin := camera.project_ray_origin(mouse_pos)
-	var ray_end := ray_origin + camera.project_ray_normal(mouse_pos) * 1000.0
-	
-	# Perform raycast:
-	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	query.collision_mask = 16
-	var space_state = get_world_3d().direct_space_state
-	var result : Dictionary = space_state.intersect_ray(query)
-	
-	# Process result:
-	if not result.is_empty():
-		mouse_intercept = result.position
-	
-	return
+func _update_direction(_delta: float) -> void:
+	pass
 
 
 # Update the velocity of the turtle:
 func _update_velocity(delta: float) -> void:
-	# GATE - turtle must be on floor to look around:
+	# GATE - turtle must be on floor to move:
 	if not is_on_floor():
 		return
 	
@@ -168,21 +109,18 @@ func _on_body_entered(other_node: Node3D) -> void:
 		return
 	
 	# GATE - other node must be a turtle:
-	print(turtle_name)
 	if other_node is not Turtle:
-		print("not a turtle")
 		return
 	var other_turtle := other_node as Turtle
 	
 	# Get relative velocities:
 	var normal = (other_turtle.global_position - global_position).normalized()
 	var relative_velocity = velocity - other_turtle.velocity
-	var collision_speed = relative_velocity.dot(normal)
+	#var collision_speed = relative_velocity.dot(normal)
+	var collision_speed = maxf(relative_velocity.dot(normal), 0.5)
 	
 	# GATE - collision velocity must be positive:
-	print(collision_speed)
 	if collision_speed < 0:
-		print("no collision speed")
 		return
 	
 	# Calculate impulse:
@@ -192,7 +130,6 @@ func _on_body_entered(other_node: Node3D) -> void:
 	
 	# Apply force:
 	var impulse_vector = impulse_magnitude * normal * 2.0
-	print(impulse_magnitude)
 	pending_collision = impulse_vector / mass
 	
 	return
