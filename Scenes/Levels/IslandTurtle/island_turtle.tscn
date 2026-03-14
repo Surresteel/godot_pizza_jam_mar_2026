@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2qwlo2yad7rm"]
+
+[ext_resource type="Material" uid="uid://cmo7firpp0aq4" path="res://Materials/IslandTurtle/island_sand.tres" id="1_22teq"]
+[ext_resource type="PackedScene" uid="uid://cik4o476ee7mx" path="res://Scenes/Levels/IslandTurtle/turtle.tscn" id="2_d581a"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_d581a"]
+material = ExtResource("1_22teq")
+radius = 1.0
+height = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nxac0"]
+radius = 4.0
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_22teq"]
+map_width = 25
+map_depth = 25
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="IslandTurtle" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 15
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_d581a")
+
+[node name="ColliderLand" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8, 0)
+shape = SubResource("SphereShape3D_nxac0")
+
+[node name="ColliderSea" type="CollisionShape3D" parent="."]
+shape = SubResource("HeightMapShape3D_22teq")
+
+[node name="Turtle" parent="." instance=ExtResource("2_d581a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049964905, 0.25146967, 0.69258165)
+turtle_name = "TurtleB"
+
+[node name="Turtle2" parent="." instance=ExtResource("2_d581a")]
+transform = Transform3D(-0.99800694, 0, -0.06310407, 0, 1, 0, 0.06310407, 0, -0.99800694, -0.069885254, 0.25146967, -0.66993415)
+turtle_name = "TurtleT"
+
+[node name="Turtle3" parent="." instance=ExtResource("2_d581a")]
+transform = Transform3D(0.12382658, 0, -0.99230385, 0, 1, 0, 0.99230385, 0, 0.12382658, -0.64949155, 0.25146967, 0.072249055)
+turtle_name = "TurtleL"
+
+[node name="Turtle4" parent="." instance=ExtResource("2_d581a")]
+transform = Transform3D(-0.166304, 0, 0.9860746, 0, 1, 0, -0.9860746, 0, -0.166304, 0.60039616, 0.25146967, 0.072249055)
+turtle_name = "TurtleR"

@@ -1,3 +1,30 @@
-[gd_scene format=3 uid="uid://eahq68aq62"]
+[gd_scene load_steps=5 format=3 uid="uid://eahq68aq62"]
+
+[ext_resource type="PackedScene" uid="uid://c2qwlo2yad7rm" path="res://Scenes/Levels/IslandTurtle/island_turtle.tscn" id="1_7wmpg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dl8aj"]
+sky_top_color = Color(0.21986955, 0.4442706, 0.7686731, 1)
+sky_horizon_color = Color(0.85671973, 0.8606268, 0.8684334, 1)
+ground_bottom_color = Color(0.4056326, 0.5244422, 0.74844605, 1)
+ground_horizon_color = Color(0.7921516, 0.7805275, 0.82472014, 1)
+
+[sub_resource type="Sky" id="Sky_hl1mb"]
+sky_material = SubResource("ProceduralSkyMaterial_dl8aj")
+
+[sub_resource type="Environment" id="Environment_87nxs"]
+background_mode = 2
+sky = SubResource("Sky_hl1mb")
 
 [node name="PlaceHolder" type="Node3D"]
+
+[node name="IslandTurtle" parent="." instance=ExtResource("1_7wmpg")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_87nxs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5258874, 0.85055417, 0, -0.85055417, 0.5258874, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.51234263, 0.85878116, 0, -0.85878116, 0.51234263, 0, 2.0311298, 1.4168006)
