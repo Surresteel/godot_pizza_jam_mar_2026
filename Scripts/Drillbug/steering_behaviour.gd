@@ -2,8 +2,8 @@ extends Node3D
 class_name SteeringBehaviour
 
 
-@export var path_radius: float = 0.5
-@export var desired_seperation: float = 0.25
+@export var path_radius: float = 0.7
+@export var desired_seperation: float = 0.2
 
 var max_speed: float
 var max_force: float
