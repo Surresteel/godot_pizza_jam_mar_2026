@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc227a83pvug0"]
+
+[ext_resource type="BoxMesh" uid="uid://ddj128umwp1b1" path="res://Scenes/Levels/Drillbug/Dirt Hurdle/dirt hurdle placeholder.tres" id="1_0x45f"]
+[ext_resource type="Script" uid="uid://bhekuhssaebno" path="res://Scripts/DirtHurdle/dirt_hurdle.gd" id="1_t0d6h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d5e05"]
+size = Vector3(0.3, 0.246, 0.13)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0x45f"]
+size = Vector3(0.3, 0.246, 0.20199585)
+
+[node name="Dirt Hurdle" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_t0d6h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123, 0)
+mesh = ExtResource("1_0x45f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123, 0)
+shape = SubResource("BoxShape3D_d5e05")
+debug_color = Color(0, 11.708403, 13.469126, 0.41960785)
+
+[node name="Drillbug Detector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Drillbug Detector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005187988, -0.0014648512, 0.005355835)
+shape = SubResource("BoxShape3D_0x45f")
+debug_color = Color(18.751299, 0, 6.0740824, 0.41960785)
+
+[connection signal="body_entered" from="Drillbug Detector" to="." method="_on_drillbug_detector_body_entered"]
+[connection signal="body_exited" from="Drillbug Detector" to="." method="_on_drillbug_detector_body_exited"]
