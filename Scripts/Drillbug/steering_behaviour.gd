@@ -2,7 +2,9 @@ extends Node3D
 class_name SteeringBehaviour
 
 
-@export var path_radius: float = 0.7
+@export var draw_lines: bool = false
+
+@export var path_radius: float = 0.2
 @export var desired_seperation: float = 0.2
 
 var max_speed: float
@@ -12,14 +14,13 @@ var steering_line = ImmediateMesh.new()
 var velocity_line = ImmediateMesh.new()
 var seperation_line = ImmediateMesh.new()
 var path_line = ImmediateMesh.new()
+var futurenormal_line = ImmediateMesh.new()
 var material := preload("uid://djflvx1tyl8nn")
 
 var normalnew = MeshInstance3D.new()
 var futuresphere = MeshInstance3D.new()
 var sphere = SphereMesh.new()
 var actualPath = ImmediateMesh.new()
-
-var failsafe = false
 
 func set_defaults(speed, force) -> void:
 	max_speed = speed
@@ -46,6 +47,10 @@ func get_normal_from_path(start_pos: Vector3, end_pos: Vector3, future_pos: Vect
 	var b: Vector3 = end_pos - start_pos
 	b = b.normalized()
 	b = b * (a.dot(b))
+	if b.length() > (end_pos - start_pos).length():
+		b = end_pos - start_pos
+	elif b.length() < 0:
+		b = start_pos
 	return start_pos + b
 
 
@@ -83,13 +88,13 @@ func follow_path(current_velcoity: Vector3, start_pos: Vector3, end_pos: Vector3
 	
 	var distance = future_pos.distance_to(normal_pos)
 	if distance > path_radius: #path radius, change if needed
-		print(distance)
 		var target_pos := (normal_pos + ((end_pos - start_pos).normalized() * length))
 		
-		var steer := target_pos - global_position# - current_velcoity
-		steer.limit_length(max_force)
+		var steer := get_steering_force(target_pos,current_velcoity)
+		steer = steer.limit_length(max_force)
 		_render_line(steer,path_line,Color.BLACK)
-		failsafe = true
+		_render_line(normal_pos - global_position,futurenormal_line,Color.CYAN)
+		_render_line(current_velcoity,velocity_line,Color.GREEN)
 		return steer
 	else:
 		return Vector3.ZERO#get_steering_force(end_pos,current_velcoity)
@@ -101,6 +106,8 @@ func seperate(drillbugs: Array[DrillBug], current_velcoity: Vector3) -> Vector3:
 	var amount: int = 0
 	var sum: Vector3 = Vector3.ZERO
 	
+	var closest_bug: float = desired_seperation
+	
 	for bug in drillbugs:
 		var d = global_position.distance_to(bug.global_position)
 		if bug != self and d < desired_seperation:
@@ -108,13 +115,18 @@ func seperate(drillbugs: Array[DrillBug], current_velcoity: Vector3) -> Vector3:
 			difference = difference.normalized()
 			sum += difference
 			amount += 1
+			
+			if d < closest_bug:
+				closest_bug = d
 	
 	if amount > 0:
 		sum /= amount
 		sum = sum.normalized() * max_speed
+		if closest_bug > 0:
+			sum *= (1-closest_bug/desired_seperation) * 0.1
 		var steer := sum - current_velcoity
 		steer = Vector3(steer.x,0,steer.z)
-		steer.limit_length(max_force)
+		steer = steer.limit_length(max_force)
 		_render_line(steer,seperation_line,Color.RED)
 		return steer
 	seperation_line.clear_surfaces()
@@ -131,6 +143,7 @@ func _ready() -> void:
 	
 	create_line(path_line)
 	create_line(actualPath)
+	create_line(futurenormal_line)
 	get_tree().get_root().add_child.call_deferred(normalnew)
 	get_tree().get_root().add_child.call_deferred(futuresphere)
 
@@ -141,7 +154,8 @@ func create_line(line):
 	get_tree().get_root().add_child.call_deferred(mesh)
 
 func _render_line(target_pos: Vector3, line: ImmediateMesh, colour: Color) -> void:
-	return
+	if !draw_lines:
+		return
 	line.clear_surfaces()
 	material.albedo_color = colour
 	

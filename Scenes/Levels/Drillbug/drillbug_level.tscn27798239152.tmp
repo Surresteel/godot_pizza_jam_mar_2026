@@ -1,0 +1,207 @@
+[gd_scene load_steps=10 format=3 uid="uid://dq0n6aaje0c81"]
+
+[ext_resource type="PackedScene" uid="uid://4penuwelymmj" path="res://Scenes/Levels/Drillbug/drillbug.tscn" id="1_nrys8"]
+[ext_resource type="PackedScene" uid="uid://dc227a83pvug0" path="res://Scenes/Levels/Drillbug/Dirt Hurdle/dirt_hurdle.tscn" id="2_00mfa"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_00mfa"]
+sky_top_color = Color(0.12941177, 0.14901961, 0.18039216, 1)
+sky_horizon_color = Color(0.40540916, 0.41717386, 0.43776208, 1)
+ground_bottom_color = Color(0.21176471, 0.23921569, 0.2901961, 1)
+ground_horizon_color = Color(0.40540916, 0.41717386, 0.43776208, 1)
+
+[sub_resource type="Sky" id="Sky_d5e05"]
+sky_material = SubResource("ProceduralSkyMaterial_00mfa")
+
+[sub_resource type="Environment" id="Environment_g1v0l"]
+background_mode = 2
+sky = SubResource("Sky_d5e05")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_nrys8"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_00mfa"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00mfa"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_d5e05"]
+material = SubResource("StandardMaterial3D_00mfa")
+radius = 0.025
+height = 0.05
+
+[node name="Drillbug Level" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g1v0l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.11146895, -0.90572333, 0.4089498, 0, 0.41151437, 0.9114033, -0.9937679, -0.10159317, 0.045871075, 0, -41.88061, -39.899082)
+shadow_enabled = true
+
+[node name="floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51, 0)
+mesh = SubResource("BoxMesh_nrys8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_00mfa")
+
+[node name="Dirt Hurdle" parent="." instance=ExtResource("2_00mfa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21149935, 0, -0.768253)
+
+[node name="Dirt Hurdle2" parent="." instance=ExtResource("2_00mfa")]
+transform = Transform3D(0.93340516, 0, 0.35882413, 0, 1, 0, -0.35882413, 0, 0.93340516, -0.26852548, 0, -1.9468398)
+
+[node name="Dirt Hurdle3" parent="." instance=ExtResource("2_00mfa")]
+transform = Transform3D(-0.9999872, 0, 0.005061388, 0, 1, 0, -0.005061388, 0, -0.9999872, -1.653827, 0, -0.5375203)
+
+[node name="Dirt Hurdle4" parent="." instance=ExtResource("2_00mfa")]
+transform = Transform3D(0.045380518, 0, -0.99896973, 0, 1, 0, 0.99896973, 0, 0.045380518, -0.5224834, 0, 0.3644722)
+
+[node name="Drillbug" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
+transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, 0.04317695, 0, 0.5430836)
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10"), NodePath("../RACEPATH/11"), NodePath("../RACEPATH/12"), NodePath("../RACEPATH/13"), NodePath("../RACEPATH/14"), NodePath("../RACEPATH/1")]
+drillbugs = [NodePath("."), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug7"), NodePath("../Drillbug8"), NodePath("../Drillbug9")]
+aceleration = 7.12
+
+[node name="Camera3D" type="Camera3D" parent="Drillbug"]
+transform = Transform3D(0.99999183, -0.004363314, 3.474396e-06, 0, 0.0007962743, 0.9999997, -0.004363315, -0.9999915, 0.0007962678, 0.009, 0.803, -0.004)
+
+[node name="Drillbug2" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
+transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, 0.04317695, 0, 0.39570117)
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10"), NodePath("../RACEPATH/11"), NodePath("../RACEPATH/12"), NodePath("../RACEPATH/13"), NodePath("../RACEPATH/14"), NodePath("../RACEPATH/1")]
+drillbugs = [NodePath("../Drillbug"), NodePath("."), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug7"), NodePath("../Drillbug8"), NodePath("../Drillbug9")]
+aceleration = 7.12
+
+[node name="Drillbug3" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
+transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, 0.15977144, 0, 0.39570117)
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10"), NodePath("../RACEPATH/11"), NodePath("../RACEPATH/12"), NodePath("../RACEPATH/13"), NodePath("../RACEPATH/14"), NodePath("../RACEPATH/1")]
+drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("."), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug7"), NodePath("../Drillbug8"), NodePath("../Drillbug9")]
+aceleration = 7.12
+
+[node name="Drillbug4" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
+transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, -0.07806465, 0, 0.39570117)
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10"), NodePath("../RACEPATH/11"), NodePath("../RACEPATH/12"), NodePath("../RACEPATH/13"), NodePath("../RACEPATH/14"), NodePath("../RACEPATH/1")]
+drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("."), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug7"), NodePath("../Drillbug8"), NodePath("../Drillbug9")]
+aceleration = 7.12
+
+[node name="Drillbug5" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
+transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, 0.04317695, 0, 0.7007739)
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10"), NodePath("../RACEPATH/11"), NodePath("../RACEPATH/12"), NodePath("../RACEPATH/13"), NodePath("../RACEPATH/14"), NodePath("../RACEPATH/1")]
+drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("."), NodePath("../Drillbug6"), NodePath("../Drillbug7"), NodePath("../Drillbug8"), NodePath("../Drillbug9")]
+aceleration = 7.12
+
+[node name="Drillbug6" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
+transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, 0.15977144, 0, 0.7007739)
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10"), NodePath("../RACEPATH/11"), NodePath("../RACEPATH/12"), NodePath("../RACEPATH/13"), NodePath("../RACEPATH/14"), NodePath("../RACEPATH/1")]
+drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("."), NodePath("../Drillbug7"), NodePath("../Drillbug8"), NodePath("../Drillbug9")]
+aceleration = 7.12
+
+[node name="Drillbug7" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
+transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, -0.07806465, 0, 0.7007739)
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10"), NodePath("../RACEPATH/11"), NodePath("../RACEPATH/12"), NodePath("../RACEPATH/13"), NodePath("../RACEPATH/14"), NodePath("../RACEPATH/1")]
+drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("."), NodePath("../Drillbug8"), NodePath("../Drillbug9")]
+aceleration = 7.12
+
+[node name="Drillbug8" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
+transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, 0.15977144, 0, 0.55606294)
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10"), NodePath("../RACEPATH/11"), NodePath("../RACEPATH/12"), NodePath("../RACEPATH/13"), NodePath("../RACEPATH/14"), NodePath("../RACEPATH/1")]
+drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug7"), NodePath("."), NodePath("../Drillbug9")]
+aceleration = 7.12
+
+[node name="Drillbug9" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
+transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, -0.07806465, 0, 0.55606294)
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10"), NodePath("../RACEPATH/11"), NodePath("../RACEPATH/12"), NodePath("../RACEPATH/13"), NodePath("../RACEPATH/14"), NodePath("../RACEPATH/1")]
+drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug7"), NodePath("../Drillbug8"), NodePath(".")]
+aceleration = 7.12
+
+[node name="RACEPATH" type="Node3D" parent="."]
+
+[node name="1" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06232816, 0, 0.080468714)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/1"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="2" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20592953, 0, -0.64375424)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/2"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="3" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23470633, 0, -0.87766135)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/3"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="4" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14370713, 0, -1.2919383)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/4"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="5" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038705945, 0, -1.6307107)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/5"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="6" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2006866, 0, -1.8670974)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/6"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="7" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49273318, 0, -1.983703)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/7"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="8" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8655355, 0, -1.94985)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/8"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="9" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3854291, 0, -1.47913)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/9"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="10" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6810255, 0, -0.69470185)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/10"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="11" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6808943, 0, -0.4166276)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/11"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="12" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2972286, 0, 0.28514594)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/12"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="13" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62753457, 0, 0.3917139)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/13"]
+mesh = SubResource("SphereMesh_d5e05")
+
+[node name="14" type="Node3D" parent="RACEPATH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40099326, 0, 0.38311678)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/14"]
+mesh = SubResource("SphereMesh_d5e05")

@@ -231,6 +231,16 @@ bind/28/pose = Transform3D(0.9200969, -0.21121362, 0.32986468, -0.39112172, -0.4
 [sub_resource type="SphereShape3D" id="SphereShape3D_00mfa"]
 radius = 0.060926095
 
+[sub_resource type="Animation" id="Animation_jipot"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1, 0, -4.371139e-08)
+
 [sub_resource type="Animation" id="Animation_ohqw3"]
 resource_name = "drill placeholder"
 loop_mode = 1
@@ -241,16 +251,6 @@ tracks/0/path = NodePath("Model")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 1, 0, -4.371139e-08, 0.23333333, 1, 0.70710677, 0.70710677, 3.090862e-08, 3.090862e-08, 0.5, 1, 1, -4.371139e-08, -4.371139e-08, 1.9106855e-15, 1, 1, 0, 1, 0, -7.54979e-08)
-
-[sub_resource type="Animation" id="Animation_jipot"]
-length = 0.001
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Model")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 1, 0, -4.371139e-08)
 
 [sub_resource type="Animation" id="Animation_0atag"]
 resource_name = "drill placeholder final"
@@ -502,3 +502,4 @@ libraries = {
 [node name="Steering Behaviour" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04749272, 0)
 script = ExtResource("2_jipot")
+path_radius = 0.1

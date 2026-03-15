@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://5ow4fd8i40k3"]
+
+[ext_resource type="Script" uid="uid://begfejfbo55fs" path="res://Scripts/waypoint/waypoint.gd" id="1_uuv2x"]
+[ext_resource type="Script" uid="uid://b3unitdepoq88" path="res://Scripts/waypoint/Path Visuliser.gd" id="2_3v8q8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00mfa"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_d5e05"]
+material = SubResource("StandardMaterial3D_00mfa")
+radius = 0.025
+height = 0.05
+
+[node name="Waypoint" type="Node3D"]
+script = ExtResource("1_uuv2x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_d5e05")
+script = ExtResource("2_3v8q8")
+
+[connection signal="editor_state_changed" from="MeshInstance3D" to="." method="_on_mesh_instance_3d_editor_state_changed"]
