@@ -1,17 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2qwlo2yad7rm"]
+[gd_scene load_steps=10 format=3 uid="uid://c2qwlo2yad7rm"]
 
 [ext_resource type="Material" uid="uid://cmo7firpp0aq4" path="res://Materials/IslandTurtle/mat_island_sand.tres" id="1_22teq"]
 [ext_resource type="Script" uid="uid://ctc17mkmrpux4" path="res://Scripts/IslandTurtle/island_turtle.gd" id="1_d581a"]
 [ext_resource type="PackedScene" uid="uid://c5pdnqaed8v21" path="res://Scenes/Levels/IslandTurtle/turtle_ai.tscn" id="3_yjp75"]
 [ext_resource type="PackedScene" uid="uid://cik4o476ee7mx" path="res://Scenes/Levels/IslandTurtle/turtle_player.tscn" id="4_watdv"]
+[ext_resource type="PackedScene" uid="uid://c5dopn2uiu8kl" path="res://Scenes/Levels/IslandTurtle/island_obstacle.tscn" id="5_watdv"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_d581a"]
 material = ExtResource("1_22teq")
-radius = 1.0
+radius = 2.0
 height = 0.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nxac0"]
-radius = 4.0
+radius = 8.0
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_22teq"]
 map_width = 25
@@ -19,7 +20,7 @@ map_depth = 25
 map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_22teq"]
-radius = 1.0
+radius = 2.0
 
 [node name="IslandTurtle" type="StaticBody3D" node_paths=PackedStringArray("turtles")]
 collision_layer = 16
@@ -31,7 +32,7 @@ turtles = [NodePath("TurtleAi"), NodePath("TurtleAi2"), NodePath("TurtleAi3"), N
 mesh = SubResource("SphereMesh_d581a")
 
 [node name="ColliderLand" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.75, 0)
 shape = SubResource("SphereShape3D_nxac0")
 
 [node name="ColliderSea" type="CollisionShape3D" parent="."]
@@ -56,3 +57,18 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="TurtlePlayer" parent="." instance=ExtResource("4_watdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.75)
+
+[node name="IslandObstacle" parent="." instance=ExtResource("5_watdv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80033004, 0.05261171, 0.990427)
+
+[node name="IslandObstacle2" parent="." instance=ExtResource("5_watdv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8499812, 0.05261171, -0.9648011)
+
+[node name="IslandObstacle3" parent="." instance=ExtResource("5_watdv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0551858, 0.05261171, -1.0456804)
+
+[node name="IslandObstacle4" parent="." instance=ExtResource("5_watdv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029987097, 0.05261147, -0.005184889)
+
+[node name="IslandObstacle5" parent="." instance=ExtResource("5_watdv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0724888, 0.05261123, 0.7780311)

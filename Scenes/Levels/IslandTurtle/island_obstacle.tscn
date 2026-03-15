@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5dopn2uiu8kl"]
+
+[ext_resource type="Script" uid="uid://bh2pi82yw40ff" path="res://Scripts/IslandTurtle/island_obstacle.gd" id="1_i0vrd"]
+[ext_resource type="Material" uid="uid://bqdvromwuykyy" path="res://Materials/IslandTurtle/mat_island_tree.tres" id="2_m6g8d"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nudln"]
+material = ExtResource("2_m6g8d")
+top_radius = 0.1
+bottom_radius = 0.15
+height = 1.0
+radial_segments = 8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i0vrd"]
+radius = 0.15
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m6g8d"]
+radius = 0.175
+
+[node name="IslandObstacle" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("1_i0vrd")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_nudln")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_i0vrd")
+
+[node name="Area" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="AreaCollider" type="CollisionShape3D" parent="Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_m6g8d")
+
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"

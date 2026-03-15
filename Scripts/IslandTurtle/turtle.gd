@@ -12,6 +12,10 @@ extends CharacterBody3D
 # IDENTITY:
 @export var turtle_name: String = ""
 
+# AUDIO:
+const SFX_HIT: AudioStreamWAV = preload("uid://cp7o3rcewyn7a")
+@onready var audio_player: AudioStreamPlayer3D = $AudioPlayer
+
 # COLLISION:
 static var rest_coef: float = 0.9
 @onready var area: Area3D = $Area
@@ -131,5 +135,33 @@ func _on_body_entered(other_node: Node3D) -> void:
 	# Apply force:
 	var impulse_vector = impulse_magnitude * normal * 2.0
 	pending_collision = impulse_vector / mass
+	
+	# Play sound:
+	_play_audio(SFX_HIT)
+	
+	return
+
+
+#===============================================================================
+#	FUNCTIONS ANIMATIONS:
+#===============================================================================
+# TODO: Add animations:
+#func _play_anim(anim: String, blend: float = 1, speed: float = 1.0) -> void:
+	#_anim_player.play(anim, blend, speed)
+	#_anim_player.queue("Swimming")
+
+
+#===============================================================================
+#	FUNCTIONS AUDIO:
+#===============================================================================
+# Plays an audio resource from the turtle:
+func _play_audio(resource, override: bool = true) -> void:
+	# GATE - must not be playing if override disabled:
+	if not override and audio_player.playing:
+		return
+	
+	# Play audio:
+	audio_player.stream = resource
+	audio_player.play()
 	
 	return
