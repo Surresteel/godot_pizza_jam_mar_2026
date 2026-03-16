@@ -36,3 +36,10 @@ static func get_nearest_node(point: Vector3, nodes: Array) -> Node3D:
 	
 	# Return nearest node:
 	return nearest
+
+
+# Returns whether two vector3s are approximately equal, ignoring y value:
+static func vec3_equal_approx_2d(v1: Vector3, v2: Vector3) -> bool:
+	v1.y = 0
+	v2.y = 0
+	return v1.is_equal_approx(v2)

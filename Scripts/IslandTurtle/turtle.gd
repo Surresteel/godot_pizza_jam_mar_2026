@@ -63,7 +63,6 @@ func _update_velocity(delta: float) -> void:
 	var new_vel = (-transform.basis.z * acceleration * delta)
 	if (velocity + new_vel).length_squared() > speed * speed:
 		return
-		#new_vel.limit_length(maxf(0.0, speed - velocity.length()))
 	velocity += new_vel
 	
 	return

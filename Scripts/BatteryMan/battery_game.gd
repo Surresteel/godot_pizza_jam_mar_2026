@@ -17,6 +17,7 @@ extends StaticBody3D
 # COLLISIONS:
 @onready var area: Area3D = $Target
 @onready var bar: Node3D = $Bar
+var _is_animating: bool = false
 
 
 #===============================================================================
@@ -24,6 +25,7 @@ extends StaticBody3D
 #===============================================================================
 
 func _ready() -> void:
+	bar.scale = Vector3(1, 0, 1)
 	area.body_entered.connect(_on_body_entered)
 
 
@@ -32,7 +34,7 @@ func _process(_delta: float) -> void:
 
 
 #===============================================================================
-#	FUNCTIONS COLLISION:
+#	FUNCTIONS - GAMEPLAY:
 #===============================================================================
 
 # Processes collisions with other turtles:
@@ -53,10 +55,15 @@ func _on_body_entered(node: Node3D) -> void:
 	strength *= hammer.weight_multi
 	
 	# Set bar scale:
-	print(strength)
 	_animate_bar(strength)
 	
 	return
+
+
+# Called when batteryman hits the target:
+func batteryman_hit() -> void:
+	var strength: float = randf_range(0.9, 1.1)
+	_animate_bar(strength)
 
 
 #===============================================================================
@@ -65,6 +72,13 @@ func _on_body_entered(node: Node3D) -> void:
 
 # Animates the bar according to strength:
 func _animate_bar(strength: float, duration: float = 1.5):
+	# GATE - must not be animating:
+	if _is_animating:
+		return
+	
+	# Toggle _is_animating:
+	_is_animating = true
+	
 	# Create grow tween:
 	var tween = create_tween()
 	tween.tween_property(bar, "scale", Vector3(1, strength, 1), duration)\
@@ -75,6 +89,14 @@ func _animate_bar(strength: float, duration: float = 1.5):
 	tween.tween_property(bar, "scale", Vector3(1, 0, 1), duration)\
 			.set_trans(Tween.TRANS_QUAD)\
 			.set_ease(Tween.EASE_IN)
+	
+	# Connect reset:
+	tween.finished.connect(_reset_animation)
+
+
+# Resets the _is_animating boolean:
+func _reset_animation() -> void:
+	_is_animating = false
 
 
 #===============================================================================

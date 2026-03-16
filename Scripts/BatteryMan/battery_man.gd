@@ -1,0 +1,171 @@
+#===============================================================================
+#	CLASS PROPERTIES:
+#===============================================================================
+class_name BatteryMan
+extends CharacterBody3D
+
+
+#===============================================================================
+#	CLASS MEMBERS:
+#===============================================================================
+
+# AUDIO:
+const SFX_HIT: AudioStreamWAV = preload("uid://dbhjs0rmy65cb")
+@onready var audio_player: AudioStreamPlayer3D = $AudioPlayer
+
+# GAMEPLAY:
+enum STATE {IDLE, MOVE_GAME, MOVE_IDLE, GAME}
+var cur_state := STATE.IDLE
+@export var tform_game: Transform3D
+@export var tform_idle: Transform3D
+@export var game: BatteryGame = null
+var game_ongoing: bool = false
+var state_change: bool = false
+
+# MOVEMENT:
+@export var speed: float = 2.0
+@export var turn_rate: float = 3.0
+
+
+#===============================================================================
+#	CALLBACKS:
+#===============================================================================
+
+# Node initialisation:
+func _ready() -> void:
+	cur_state = STATE.MOVE_GAME
+
+
+func _process(delta: float) -> void:
+	match cur_state:
+		STATE.IDLE:
+			if state_change:
+				transform = tform_idle
+				state_change = false
+			
+			# TODO: Idle stuff
+		STATE.MOVE_GAME:
+			if _go_to_point(delta, tform_game.origin):
+				cur_state = STATE.GAME
+				state_change = true
+		STATE.MOVE_IDLE:
+			if _go_to_point(delta, tform_idle.origin):
+				cur_state = STATE.IDLE
+				state_change = true
+		STATE.GAME:
+			if state_change:
+				transform = tform_game
+				game_ongoing = true
+				state_change = false
+				_play_game()
+			
+			if not game_ongoing:
+				cur_state = STATE.MOVE_IDLE
+				state_change = true
+
+
+#===============================================================================
+#	FUNCTIONS - GAME:
+#===============================================================================
+
+# Gets batteryman to play the game:
+func _play_game() -> void:
+	# GATE - must have reference to game:
+	if not game:
+		game_ongoing = false
+		return
+	
+	# Configure tween:
+	var tween = create_tween()
+	var target_angle = deg_to_rad(-76)
+	tween.tween_property(self, "rotation:x", target_angle, 0.2) \
+			.set_trans(Tween.TRANS_QUAD) \
+			.set_ease(Tween.EASE_OUT)
+	
+	# Hit target:
+	tween.tween_callback(func(): 
+		game.batteryman_hit()
+		_play_audio(SFX_HIT))
+	
+	tween.tween_property(self, "rotation:x", 0, 0.4) \
+			.set_trans(Tween.TRANS_QUAD) \
+			.set_ease(Tween.EASE_OUT)
+	
+	# End game:
+	tween.finished.connect(func(): game_ongoing = false)
+
+
+#===============================================================================
+#	FUNCTIONS - MOVEMENT:
+#===============================================================================
+
+# Moves Batteryman to a point:
+func _go_to_point(delta:float, point: Vector3) -> bool:
+	# Exit if close to destination:
+	if (global_position - point).length() < 0.1:
+		return true
+	
+	# Move and return:
+	_update_direction(delta, point)
+	_update_velocity()
+	move_and_slide()
+	
+	return false
+
+
+# Handles Batteryman's looking direction:
+func _update_direction(delta: float, target: Vector3) -> void:
+	# GATE - batteryman must be on floor to look around:
+	if not is_on_floor():
+		return
+	
+	# Calculate new basis:
+	var pos = target - global_position
+	var new_basis: Basis = Basis.looking_at(pos, Vector3.UP)
+	
+	# Convert to quaternions:
+	var current_quat = transform.basis.get_rotation_quaternion()
+	var target_quat = new_basis.get_rotation_quaternion()
+	var angle_diff = current_quat.angle_to(target_quat)
+	
+	# GATE - angle must be sufficiently different:
+	if angle_diff < 0.001:
+		return
+	
+	# Apply basis slerp:
+	var weight = min(1.0, (turn_rate * delta) / angle_diff)
+	transform.basis = Basis(current_quat.slerp(target_quat, weight))
+	#transform.basis = new_basis
+	
+	return
+
+
+# Update the velocity of batteryman:
+func _update_velocity() -> void:
+	# GATE - turtle must be on floor to move:
+	if not is_on_floor():
+		return
+	
+	# Velocity calculations:
+	var step = speed
+	
+	# Update velocity:
+	velocity = (-transform.basis.z * step)
+	
+	return
+
+
+#===============================================================================
+#	FUNCTIONS - AUDIO:
+#===============================================================================
+# Plays an audio resource from the turtle:
+func _play_audio(resource, override: bool = true) -> void:
+	# GATE - must not be playing if override disabled:
+	if not override and audio_player.playing:
+		return
+	
+	# Play audio:
+	audio_player.stream = resource
+	audio_player.play()
+	
+	return
