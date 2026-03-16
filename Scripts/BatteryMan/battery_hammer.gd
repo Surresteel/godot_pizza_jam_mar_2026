@@ -20,6 +20,10 @@ extends AnimatableBody3D
 @export var alignPoint := Vector3.BACK
 
 
+# STATS:
+@export var weight_multi: float = 0.8
+
+
 # INPUT AND MOVEMENT:
 @export var mouse_warp: float = 0.55
 @export var speed: float = 20.0
@@ -35,7 +39,7 @@ var cur_idx: int = 0
 # Node initialisation:
 func _ready() -> void:
 	pos_prev = global_position
-	vel_history.resize(5)
+	vel_history.resize(10)
 	sync_to_physics = false
 	# DEBUG:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -95,6 +99,16 @@ func get_velocity_average() -> Vector3:
 		sum += vel
 	
 	return sum / vel_history.size()
+
+
+# Returns the average velocity of the hammer over the last five frames:
+func get_velocity_highest() -> Vector3:
+	var highest := Vector3.ZERO
+	for vel in vel_history:
+		if vel.length_squared() > highest.length_squared():
+			highest = vel
+	
+	return highest
 
 
 #===============================================================================

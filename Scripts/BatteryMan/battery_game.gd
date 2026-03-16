@@ -47,11 +47,13 @@ func _on_body_entered(node: Node3D) -> void:
 	var hammer := node as BatteryHammer
 	
 	# Get speed of strike:
-	var vel_avg: Vector3 = hammer.get_velocity_average()
-	var dot_down: float = vel_avg.dot(Vector3.DOWN)
-	var strength: float = clampf(dot_down / hammer.speed, 0.0, 1.0)
+	var vel_highest: Vector3 = hammer.get_velocity_highest()
+	var dot_down: float = vel_highest.dot(Vector3.DOWN)
+	var strength: float = clampf(dot_down / hammer.speed, 0.0, 2.0)
+	strength *= hammer.weight_multi
 	
 	# Set bar scale:
+	print(strength)
 	_animate_bar(strength)
 	
 	return
@@ -63,9 +65,6 @@ func _on_body_entered(node: Node3D) -> void:
 
 # Animates the bar according to strength:
 func _animate_bar(strength: float, duration: float = 1.5):
-	# Reset scale:
-	bar.scale = Vector3(1, 0, 1)
-	
 	# Create grow tween:
 	var tween = create_tween()
 	tween.tween_property(bar, "scale", Vector3(1, strength, 1), duration)\

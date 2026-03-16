@@ -23,8 +23,9 @@ transform = Transform3D(1, 0, 0, 0, 0.01881353, -0.99982303, 0, 0.99982303, 0.01
 cam = NodePath("../Camera3D")
 target = Vector3(0, 0.29738495, -0.2844553)
 alignPoint = Vector3(0, 0.2980023, -1.9352027)
-mouse_warp = 1.0
-speed = 10.0
+weight_multi = 0.5
+mouse_warp = 0.6
+speed = 15.0
 
 [node name="BatteryGame" parent="." instance=ExtResource("2_nsva2")]
 
