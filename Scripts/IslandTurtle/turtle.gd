@@ -30,7 +30,7 @@ var speed: float = 0.5
 
 
 #===============================================================================
-#	FUNCTIONS MOVEMENT:
+#	FUNCTIONS - MOVEMENT:
 #===============================================================================
 
 # Applies gravity to the turtle:
@@ -103,7 +103,7 @@ func _apply_pending_collision() -> void:
 
 
 #===============================================================================
-#	FUNCTIONS COLLISION:
+#	FUNCTIONS - COLLISION:
 #===============================================================================
 
 # Processes collisions with other turtles:
@@ -143,7 +143,7 @@ func _on_body_entered(other_node: Node3D) -> void:
 
 
 #===============================================================================
-#	FUNCTIONS ANIMATIONS:
+#	FUNCTIONS - ANIMATIONS:
 #===============================================================================
 # TODO: Add animations:
 #func _play_anim(anim: String, blend: float = 1, speed: float = 1.0) -> void:
@@ -152,7 +152,7 @@ func _on_body_entered(other_node: Node3D) -> void:
 
 
 #===============================================================================
-#	FUNCTIONS AUDIO:
+#	FUNCTIONS - AUDIO:
 #===============================================================================
 # Plays an audio resource from the turtle:
 func _play_audio(resource, override: bool = true) -> void:

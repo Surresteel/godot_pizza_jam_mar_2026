@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://dk2r88inqymq8"]
+
+[ext_resource type="Material" uid="uid://tpom7irl7vh6" path="res://Materials/IslandTurtle/mat_battery_bar.tres" id="1_w1mge"]
+[ext_resource type="Script" uid="uid://ci3mxmjrbepxo" path="res://Scripts/BatteryMan/battery_game.gd" id="1_xxv26"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w1mge"]
+size = Vector3(0.5, 0.3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xxv26"]
+size = Vector3(0.5, 1.5, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xxv26"]
+size = Vector3(0.5, 0.3, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uwl8c"]
+size = Vector3(0.5, 1.5, 0.25)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5apac"]
+material = ExtResource("1_w1mge")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xhf6j"]
+material = ExtResource("1_w1mge")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.25
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uwl8c"]
+height = 0.12
+radius = 0.2
+
+[node name="BatteryGame" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 15
+script = ExtResource("1_xxv26")
+
+[node name="ColliderBase" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14916992, 0)
+shape = SubResource("BoxShape3D_w1mge")
+
+[node name="ColliderFace" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0532554, 0.36906517)
+shape = SubResource("BoxShape3D_xxv26")
+
+[node name="MeshBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("BoxMesh_xxv26")
+
+[node name="MeshFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0.37)
+mesh = SubResource("BoxMesh_uwl8c")
+
+[node name="MeshTarget" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28603286, -0.28554308)
+mesh = SubResource("CylinderMesh_5apac")
+
+[node name="Bar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29, 0.245)
+
+[node name="MeshBar" type="MeshInstance3D" parent="Bar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+mesh = SubResource("CylinderMesh_xhf6j")
+
+[node name="Target" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="ColliderTarget" type="CollisionShape3D" parent="Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.312, -0.285)
+shape = SubResource("CylinderShape3D_uwl8c")
+
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4804701, 0.36797547)
+bus = &"SFX"

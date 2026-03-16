@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtaqgfqxclure"]
+
+[ext_resource type="PackedScene" uid="uid://c70r8yywkxygv" path="res://Scenes/Levels/BatteryMan/battery_hammer.tscn" id="1_bhl47"]
+[ext_resource type="PackedScene" uid="uid://dk2r88inqymq8" path="res://Scenes/Levels/BatteryMan/battery_game.tscn" id="2_nsva2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bhl47"]
+sky_top_color = Color(0.21986955, 0.4442706, 0.7686731, 1)
+sky_horizon_color = Color(0.85671973, 0.8606268, 0.8684334, 1)
+ground_bottom_color = Color(0.4056326, 0.5244422, 0.74844605, 1)
+ground_horizon_color = Color(0.7921516, 0.7805275, 0.82472014, 1)
+
+[sub_resource type="Sky" id="Sky_hl1mb"]
+sky_material = SubResource("ProceduralSkyMaterial_bhl47")
+
+[sub_resource type="Environment" id="Environment_nsva2"]
+background_mode = 2
+sky = SubResource("Sky_hl1mb")
+
+[node name="TestBatteryMan" type="Node3D"]
+
+[node name="BatteryHammer" parent="." node_paths=PackedStringArray("cam") instance=ExtResource("1_bhl47")]
+transform = Transform3D(1, 0, 0, 0, 0.01881353, -0.99982303, 0, 0.99982303, 0.01881353, 2.3841858e-07, 1.6771593, -0.3139118)
+cam = NodePath("../Camera3D")
+target = Vector3(0, 0.29738495, -0.2844553)
+alignPoint = Vector3(0, 0.2980023, -1.9352027)
+mouse_warp = 1.0
+speed = 10.0
+
+[node name="BatteryGame" parent="." instance=ExtResource("2_nsva2")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 1.7763568e-15, -8.742278e-08, -1.4859136e-08, 0.9854495, 0.16996872, 8.615073e-08, 0.16996872, -0.9854495, 1.1920929e-07, 1.2653092, -2.2294838)
+fov = 60.0
+
+[node name="Target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29738495, -0.2844553)
+
+[node name="Align" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2980023, -1.9352027)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nsva2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.6972839, 0.33942628, -0.6313359, 0.5257242, -0.8408853, 0.1285535, -0.48724654, -0.42154676, -0.7647804, 0, 10, 0)
+shadow_enabled = true
