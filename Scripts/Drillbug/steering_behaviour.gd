@@ -48,11 +48,8 @@ func get_normal_from_path(start_pos: Vector3, end_pos: Vector3, future_pos: Vect
 	var normal := b.normalized()
 	normal *= (a.dot(normal))
 	
-	var anormal := start_pos.distance_to(normal + start_pos)
-	var bnormal := (normal + start_pos).distance_to(end_pos)
-	
-	if anormal + bnormal > start_pos.distance_to(end_pos):
-		normal = end_pos - start_pos
+	if normal.length() > b.length():
+		normal = b
 	return start_pos + normal
 
 
