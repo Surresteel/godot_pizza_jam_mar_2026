@@ -160,32 +160,32 @@ drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Dri
 [node name="RACEPATH" type="Node3D" parent="."]
 
 [node name="1" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21518573, 2.3841858e-07, -0.4762016)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64728284, 2.3841858e-07, -0.38537142)
 next_waypoint = NodePath("../2")
 previous_waypoint = NodePath("../6")
 
 [node name="2" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.112282544, -5.9604645e-08, -1.291629)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2095747, -5.9604645e-08, -2.167192)
 next_waypoint = NodePath("../3")
 previous_waypoint = NodePath("../1")
 
 [node name="3" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.484443, 1.1920929e-07, -2.3624408)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5881182, 3.5762787e-07, -4.0454097)
 next_waypoint = NodePath("../4")
 previous_waypoint = NodePath("../2")
 
 [node name="4" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8493123, 0, -1.6775624)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0245708, 0, -2.0456803)
 next_waypoint = NodePath("../5")
 previous_waypoint = NodePath("../3")
 
 [node name="5" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6463937, 0, -0.34962133)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.374978, 0, -1.9333696)
 next_waypoint = NodePath("../6")
 previous_waypoint = NodePath("../4")
 
 [node name="6" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5662845, 0, 0.4008935)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9313412, 0, -0.67495996)
 next_waypoint = NodePath("../1")
 previous_waypoint = NodePath("../5")
 

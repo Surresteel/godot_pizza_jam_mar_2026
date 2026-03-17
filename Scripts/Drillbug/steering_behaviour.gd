@@ -30,8 +30,8 @@ func set_defaults(speed, force) -> void:
 ## Steering Force
 func get_steering_force(target: Vector3, current_velocity: Vector3) -> Vector3:
 	var steering_force: Vector3 = (_get_desired_velocity(target) - current_velocity).limit_length(max_force)
-	_render_line(steering_force,steering_line,Color.BLUE)
-	_render_line(current_velocity,velocity_line,Color.GREEN)
+	#_render_line(steering_force,steering_line,Color.BLUE)
+	#_render_line(current_velocity,velocity_line,Color.GREEN)
 	return steering_force
 
 func _get_desired_velocity(target: Vector3) -> Vector3:
@@ -45,13 +45,15 @@ func get_future_pos(velocity: Vector3, Length: float = 0.15) -> Vector3:
 func get_normal_from_path(start_pos: Vector3, end_pos: Vector3, future_pos: Vector3) -> Vector3:
 	var a: Vector3 = future_pos - start_pos
 	var b: Vector3 = end_pos - start_pos
-	b = b.normalized()
-	b = b * (a.dot(b))
-	if b.length() > (end_pos - start_pos).length():
-		b = end_pos - start_pos
-	elif b.length() < 0:
-		b = start_pos
-	return start_pos + b
+	var normal := b.normalized()
+	normal *= (a.dot(normal))
+	
+	var anormal := start_pos.distance_to(normal + start_pos)
+	var bnormal := (normal + start_pos).distance_to(end_pos)
+	
+	if anormal + bnormal > start_pos.distance_to(end_pos):
+		normal = end_pos - start_pos
+	return start_pos + normal
 
 
 func follow_path(current_velcoity: Vector3, path: Array[WayPoint], length: float) -> Vector3:
@@ -59,7 +61,7 @@ func follow_path(current_velcoity: Vector3, path: Array[WayPoint], length: float
 	var closest_point_distance: float = 69420.0
 	var target_pos: Vector3
 	var normal_pos: Vector3
-	var distance: float
+	var future_pos:= get_future_pos(current_velcoity)
 	
 	var start_pos: Vector3
 	var end_pos: Vector3
@@ -69,25 +71,25 @@ func follow_path(current_velcoity: Vector3, path: Array[WayPoint], length: float
 		start_pos = points.Start_wayPoint.global_position
 		end_pos = points.next_waypoint.global_position
 		
-		var future_pos:= get_future_pos(current_velcoity)
 		normal_pos = get_normal_from_path(start_pos,end_pos,future_pos)
 		
-		distance = future_pos.distance_to(normal_pos)
+		var distance: float = future_pos.distance_to(normal_pos)
 		
 		if distance < closest_point_distance:
 			closest_point_distance = distance
-			target_pos = normal_pos
+			target_pos = (normal_pos + ((end_pos - start_pos).normalized() * length))
 	
-	if distance > path_radius:
-		target_pos = (normal_pos + ((end_pos - start_pos).normalized() * length))
-		
+	if closest_point_distance > path_radius:
 		var steer := get_steering_force(target_pos,current_velcoity)
-		steer = steer * (2 - path_radius/distance) #scale the force by 1-2 based on how far off the path they are
-		_render_line(steer,path_line,Color.BLACK)
-		_render_line(normal_pos - global_position,futurenormal_line,Color.CYAN)
-		_render_line(current_velcoity,velocity_line,Color.GREEN)
+		#scale the force by how far off the path they are
+		steer = steer * (5 * (1 - path_radius/closest_point_distance))
+		_render_line(steer,path_line,Color.RED)
+		_render_line(target_pos - global_position,futurenormal_line,Color.BLUE)
+		#_render_line(current_velcoity,velocity_line,Color.GREEN)
 		return steer
 	else:
+		path_line.clear_surfaces()
+		futurenormal_line.clear_surfaces()
 		return Vector3.ZERO
 
 
@@ -115,9 +117,8 @@ func seperate(drillbugs: Array[DrillBug], current_velcoity: Vector3) -> Vector3:
 		var steer := sum - current_velcoity
 		steer = Vector3(steer.x,0,steer.z)
 		steer = steer.limit_length(max_force*0.5)
-		_render_line(steer,seperation_line,Color.RED)
+		#_render_line(steer,seperation_line,Color.RED)
 		return steer
-	_render_line(Vector3(0,5,0),seperation_line,Color.RED)
 	return Vector3.ZERO
 
 

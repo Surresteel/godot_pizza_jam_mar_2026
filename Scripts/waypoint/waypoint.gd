@@ -21,7 +21,8 @@ func _ready() -> void:
 			updated.connect(previous_waypoint._create_new_path_visual)
 		_create_new_path_visual()
 	else:
-		Start_wayPoint.set_notify_transform(false)
+		#Start_wayPoint.set_notify_transform(false)
+		_create_new_path_visual()
 
 
 func _notification(what: int) -> void:
