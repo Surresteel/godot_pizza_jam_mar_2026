@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cyl4dk2xqphte"
-path="res://.godot/imported/DrillBugJAnimations.blend-60f228ecdfc39605958efa390ee36f2f.scn"
+uid="uid://jk4aka6dcjhu"
+path="res://.godot/imported/DrillBugJAnimationsdDoneFixed.blend-bd642eb39abd8cca5e2605474665a5d4.scn"
 
 [deps]
 
-source_file="res://blends/DrillBugJAnimations.blend"
-dest_files=["res://.godot/imported/DrillBugJAnimations.blend-60f228ecdfc39605958efa390ee36f2f.scn"]
+source_file="res://blends/DrillBugJAnimationsdDoneFixed.blend"
+dest_files=["res://.godot/imported/DrillBugJAnimationsdDoneFixed.blend-bd642eb39abd8cca5e2605474665a5d4.scn"]
 
 [params]
 

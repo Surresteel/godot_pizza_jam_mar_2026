@@ -54,50 +54,41 @@ func get_normal_from_path(start_pos: Vector3, end_pos: Vector3, future_pos: Vect
 	return start_pos + b
 
 
-func follow_path(current_velcoity: Vector3, start_pos: Vector3, end_pos: Vector3, length: float) -> Vector3:
-	#
-	#if failsafe:
-		#return Vector3.ZERO
+func follow_path(current_velcoity: Vector3, path: Array[WayPoint], length: float) -> Vector3:
 	
-	var future_pos:= get_future_pos(current_velcoity)
-	var normal_pos:= get_normal_from_path(start_pos,end_pos,future_pos)
+	var closest_point_distance: float = 69420.0
+	var target_pos: Vector3
+	var normal_pos: Vector3
+	var distance: float
 	
-	#debugging
-	#actualPath.clear_surfaces()
-	#material.albedo_color = Color.REBECCA_PURPLE
-	#actualPath.surface_begin(Mesh.PRIMITIVE_LINES, material)
-	#actualPath.surface_set_color(Color.REBECCA_PURPLE)
-	#actualPath.surface_add_vertex(start_pos)
-	#actualPath.surface_set_color(Color.REBECCA_PURPLE)
-	#actualPath.surface_add_vertex(end_pos)
-	#actualPath.surface_end()
-	#
-	#normalnew.mesh = sphere
-	#normalnew.position = normal_pos
-	#sphere.radius = 0.005
-	#sphere.height = sphere.radius*2
-	#
-	#futuresphere.mesh = SphereMesh.new()
-	#futuresphere.mesh.radius = 0.005
-	#futuresphere.mesh.height = sphere.radius*2
-	#futuresphere.position = future_pos
-	#var mat1 := StandardMaterial3D.new()
-	#futuresphere.mesh.material = mat1
-	#mat1.albedo_color = Color.REBECCA_PURPLE
-	#debugging end
+	var start_pos: Vector3
+	var end_pos: Vector3
 	
-	var distance = future_pos.distance_to(normal_pos)
-	if distance > path_radius: #path radius, change if needed
-		var target_pos := (normal_pos + ((end_pos - start_pos).normalized() * length))
+	for points in path:
+		
+		start_pos = points.Start_wayPoint.global_position
+		end_pos = points.next_waypoint.global_position
+		
+		var future_pos:= get_future_pos(current_velcoity)
+		normal_pos = get_normal_from_path(start_pos,end_pos,future_pos)
+		
+		distance = future_pos.distance_to(normal_pos)
+		
+		if distance < closest_point_distance:
+			closest_point_distance = distance
+			target_pos = normal_pos
+	
+	if distance > path_radius:
+		target_pos = (normal_pos + ((end_pos - start_pos).normalized() * length))
 		
 		var steer := get_steering_force(target_pos,current_velcoity)
-		steer = steer.limit_length(max_force)
+		steer = steer * (2 - path_radius/distance) #scale the force by 1-2 based on how far off the path they are
 		_render_line(steer,path_line,Color.BLACK)
 		_render_line(normal_pos - global_position,futurenormal_line,Color.CYAN)
 		_render_line(current_velcoity,velocity_line,Color.GREEN)
 		return steer
 	else:
-		return Vector3.ZERO#get_steering_force(end_pos,current_velcoity)
+		return Vector3.ZERO
 
 
 ## seperation
@@ -112,7 +103,7 @@ func seperate(drillbugs: Array[DrillBug], current_velcoity: Vector3) -> Vector3:
 		var d = global_position.distance_to(bug.global_position)
 		if bug != self and d < desired_seperation:
 			var difference = global_position - bug.global_position
-			difference = difference.normalized()
+			difference = difference * (1-closest_bug/desired_seperation)
 			sum += difference
 			amount += 1
 			
@@ -121,15 +112,12 @@ func seperate(drillbugs: Array[DrillBug], current_velcoity: Vector3) -> Vector3:
 	
 	if amount > 0:
 		sum /= amount
-		sum = sum.normalized() * max_speed
-		if closest_bug > 0:
-			sum *= (1-closest_bug/desired_seperation) * 0.1
 		var steer := sum - current_velcoity
 		steer = Vector3(steer.x,0,steer.z)
-		steer = steer.limit_length(max_force)
+		steer = steer.limit_length(max_force*0.5)
 		_render_line(steer,seperation_line,Color.RED)
 		return steer
-	seperation_line.clear_surfaces()
+	_render_line(Vector3(0,5,0),seperation_line,Color.RED)
 	return Vector3.ZERO
 
 
