@@ -4,7 +4,6 @@ class_name SteeringBehaviour
 
 @export var draw_lines: bool = false
 
-@export var path_radius: float = 0.2
 @export var desired_seperation: float = 0.2
 
 var max_speed: float
@@ -48,8 +47,12 @@ func get_normal_from_path(start_pos: Vector3, end_pos: Vector3, future_pos: Vect
 	var normal := b.normalized()
 	normal *= (a.dot(normal))
 	
-	if normal.length() > b.length():
-		normal = b
+	var anormal := start_pos.distance_to(normal + start_pos)
+	var bnormal := (normal + start_pos).distance_to(end_pos)
+	
+	if anormal + bnormal > start_pos.distance_to(end_pos) * 1.05:
+		normal = end_pos - start_pos
+	
 	return start_pos + normal
 
 
@@ -63,6 +66,8 @@ func follow_path(current_velcoity: Vector3, path: Array[WayPoint], length: float
 	var start_pos: Vector3
 	var end_pos: Vector3
 	
+	var closest_point: WayPoint
+	
 	for points in path:
 		
 		start_pos = points.Start_wayPoint.global_position
@@ -73,21 +78,31 @@ func follow_path(current_velcoity: Vector3, path: Array[WayPoint], length: float
 		var distance: float = future_pos.distance_to(normal_pos)
 		
 		if distance < closest_point_distance:
+			closest_point = points
 			closest_point_distance = distance
 			target_pos = (normal_pos + ((end_pos - start_pos).normalized() * length))
 	
-	if closest_point_distance > path_radius:
+	var wrong_way: bool = false
+	if -global_basis.z.dot((closest_point.next_waypoint.global_position 
+			- closest_point.Start_wayPoint.global_position).normalized()) < 0:
+				wrong_way = false
+	
+	
+	
+	if closest_point_distance > closest_point.path_radius:
 		var steer := get_steering_force(target_pos,current_velcoity)
 		#scale the force by how far off the path they are
-		steer = steer * (5 * (1 - path_radius/closest_point_distance))
+		steer = steer * (10 * (1 - closest_point.path_radius/closest_point_distance))
 		_render_line(steer,path_line,Color.RED)
 		_render_line(target_pos - global_position,futurenormal_line,Color.BLUE)
-		#_render_line(current_velcoity,velocity_line,Color.GREEN)
+		_render_line(current_velcoity,velocity_line,Color.GREEN)
 		return steer
 	else:
 		path_line.clear_surfaces()
 		futurenormal_line.clear_surfaces()
-		return Vector3.ZERO
+		_render_line(current_velcoity,velocity_line,Color.GREEN)
+		
+		return get_steering_force(closest_point.next_waypoint.global_position,current_velcoity) 
 
 
 ## seperation

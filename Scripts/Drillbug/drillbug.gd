@@ -41,6 +41,7 @@ func start_race() -> void:
 
 
 func _ready() -> void:
+	racing = true
 	speed = randf_range(0.75,1.5)
 	dig_speed = randf_range(0.5,1.75)
 	aceleration = randf_range(1,3)
@@ -75,14 +76,6 @@ func _physics_process(delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if racing:
-		var dir: Vector3 = (race_waypoints[current_waypoint].global_position - global_position)
-		if dir.length() < 0.7:
-			current_waypoint += 1
-			current_waypoint %= race_waypoints.size()
-			steering_behaviour.path_radius = race_waypoints[current_waypoint].path_radius
-			return
-		dir = dir.normalized()
-		
 		#rotate forward
 		var angle = atan2(-velocity.x, -velocity.z)
 		global_rotation.y =  angle
