@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0rq1131bhreh"]
+
+[ext_resource type="Script" uid="uid://38h1dxcoe8eh" path="res://Scripts/Drillbug/race_manager.gd" id="1_5i1ui"]
+
+[node name="Race manager" type="Node3D"]
+script = ExtResource("1_5i1ui")
