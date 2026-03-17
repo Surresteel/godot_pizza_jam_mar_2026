@@ -55,12 +55,8 @@ func _physics_process(delta: float) -> void:
 	var new_velocity :Vector3 = Vector3.ZERO
 	var min_speed: float = max_speed * 0.7
 	
-	#steering to stay aligned with an arbitary path
-	var start_pos := race_waypoints[(current_waypoint-1+race_waypoints.size())%race_waypoints.size()].global_position
-	var end_pos := race_waypoints[current_waypoint].global_position
-	
-	
-	new_velocity += steering_behaviour.follow_path(velocity, start_pos,end_pos,length) * delta
+	#steering to stay aligned with a path
+	new_velocity += steering_behaviour.follow_path(velocity, race_waypoints, length) * delta
 	
 	#steering to avoid other drillbugs
 	new_velocity += steering_behaviour.seperate(drillbugs,velocity) * delta

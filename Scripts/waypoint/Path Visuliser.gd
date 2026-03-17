@@ -10,8 +10,9 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		pivot.add_child(path_mesh)
 	else:
-		if path_mesh != null:
-			path_mesh.queue_free()
+		pivot.add_child(path_mesh)
+		#if path_mesh != null:
+			#path_mesh.queue_free()
 
 func create_path_visual(path_radius: float, path_start: Vector3, path_end: Vector3) -> void:
 	path_mesh.mesh = CapsuleMesh.new()
