@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2hlu4il2fp0w"]
+
+[ext_resource type="Script" uid="uid://nfvsscndikpv" path="res://Scripts/RingToss/ring_target.gd" id="1_ln7lu"]
+[ext_resource type="Material" uid="uid://cuuh37pk5rfd3" path="res://Materials/IslandTurtle/mat_turtle_player.tres" id="2_lkfs3"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hgf4b"]
+points = PackedVector3Array(0.07, 0.5, 0, 0, 0.5, 0.07, -0.07, 0.5, 0, 0, 0.5, -0.07, 0.25, 0, 0, 0, 0, 0.25, -0.25, 0, 0, 0, 0, -0.25)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ln7lu"]
+material = ExtResource("2_lkfs3")
+top_radius = 0.07
+bottom_radius = 0.25
+height = 0.5
+radial_segments = 4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lkfs3"]
+radius = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l68nr"]
+radius = 0.1
+
+[node name="RingTarget" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_ln7lu")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_hgf4b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_ln7lu")
+
+[node name="AreaFwd" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 4
+
+[node name="ColSphere" type="CollisionShape3D" parent="AreaFwd"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3993304, -0.11174837)
+shape = SubResource("SphereShape3D_lkfs3")
+
+[node name="AreaAft" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 4
+
+[node name="ColSphere" type="CollisionShape3D" parent="AreaAft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3997544, 0.10386798)
+shape = SubResource("SphereShape3D_l68nr")

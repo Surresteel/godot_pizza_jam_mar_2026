@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cydpqbfsf6gqe"]
+
+[ext_resource type="Script" uid="uid://cu7kbyf0vuun3" path="res://Scripts/RingToss/ring_tosser_player.gd" id="1_v381h"]
+
+[node name="RingTosserPlayer" type="Node3D"]
+script = ExtResource("1_v381h")
+
+[node name="Cam" type="Camera3D" parent="."]
+
+[node name="RingSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.5)
