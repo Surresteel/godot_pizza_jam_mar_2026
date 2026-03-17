@@ -13,18 +13,21 @@ extends CharacterBody3D
 const SFX_HIT: AudioStreamWAV = preload("uid://dbhjs0rmy65cb")
 @onready var audio_player: AudioStreamPlayer3D = $AudioPlayer
 
+# INTERACTABLE:
+@onready var interactable: Interactable = $Interactable
+
 # GAMEPLAY:
 enum STATE {IDLE, MOVE_GAME, MOVE_IDLE, GAME}
 var cur_state := STATE.IDLE
-@export var tform_game: Transform3D
-@export var tform_idle: Transform3D
+@export var node_game: Node3D
+@export var node_idle: Node3D
 @export var game: BatteryGame = null
 var game_ongoing: bool = false
 var state_change: bool = false
 
 # MOVEMENT:
 @export var speed: float = 2.0
-@export var turn_rate: float = 3.0
+@export var turn_rate: float = 6.0
 
 
 #===============================================================================
@@ -33,28 +36,34 @@ var state_change: bool = false
 
 # Node initialisation:
 func _ready() -> void:
-	cur_state = STATE.MOVE_GAME
+	cur_state = STATE.MOVE_IDLE
+	interactable.activated.connect(_activate_game)
+	GameManager.game_change.connect(_on_game_change)
 
 
 func _process(delta: float) -> void:
 	match cur_state:
 		STATE.IDLE:
 			if state_change:
-				transform = tform_idle
+				global_basis = node_idle.global_basis
 				state_change = false
 			
 			# TODO: Idle stuff
 		STATE.MOVE_GAME:
-			if _go_to_point(delta, tform_game.origin):
+			_apply_gravity(delta)
+			if _go_to_point(delta, node_game.global_position):
 				cur_state = STATE.GAME
 				state_change = true
 		STATE.MOVE_IDLE:
-			if _go_to_point(delta, tform_idle.origin):
+			_apply_gravity(delta)
+			if _go_to_point(delta, node_idle.global_position):
 				cur_state = STATE.IDLE
 				state_change = true
 		STATE.GAME:
 			if state_change:
-				transform = tform_game
+				print(global_position)
+				print(node_game.global_position)
+				global_basis = node_game.global_basis
 				game_ongoing = true
 				state_change = false
 				_play_game()
@@ -67,6 +76,19 @@ func _process(delta: float) -> void:
 #===============================================================================
 #	FUNCTIONS - GAME:
 #===============================================================================
+
+func _on_game_change(old: GameManager.GAME, _new: GameManager.GAME) -> void:
+	# GATE - old game must be hammer game:
+	if old != GameManager.GAME.HAMMER:
+		return
+	
+	cur_state = STATE.MOVE_GAME
+	
+	return
+
+
+func _activate_game() -> void:
+	GameManager.switch_game(GameManager.GAME.HAMMER)
 
 # Gets batteryman to play the game:
 func _play_game() -> void:
@@ -99,10 +121,23 @@ func _play_game() -> void:
 #	FUNCTIONS - MOVEMENT:
 #===============================================================================
 
+# Applies gravity to the turtle:
+func _apply_gravity(delta: float) -> void:
+	# GATE - Turtle must be in air:
+	if is_on_floor():
+		return
+	
+	# Apply gravity:
+	velocity += get_gravity() * delta
+	
+	return
+
+
 # Moves Batteryman to a point:
 func _go_to_point(delta:float, point: Vector3) -> bool:
 	# Exit if close to destination:
 	if (global_position - point).length() < 0.1:
+		print("arrived")
 		return true
 	
 	# Move and return:
@@ -135,7 +170,6 @@ func _update_direction(delta: float, target: Vector3) -> void:
 	# Apply basis slerp:
 	var weight = min(1.0, (turn_rate * delta) / angle_diff)
 	transform.basis = Basis(current_quat.slerp(target_quat, weight))
-	#transform.basis = new_basis
 	
 	return
 

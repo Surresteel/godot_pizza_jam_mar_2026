@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://dro61sv4qfhvd"]
+[gd_scene load_steps=13 format=4 uid="uid://dro61sv4qfhvd"]
 
 [ext_resource type="Script" uid="uid://qgvofnmde8x2" path="res://Scripts/Player/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://ccynser2co5dg" path="res://Scripts/Player/playerCamera.gd" id="2_onrkg"]
@@ -231,7 +231,10 @@ bind/28/pose = Transform3D(0.9200969, -0.21121362, 0.32986468, -0.39112172, -0.4
 [sub_resource type="SphereShape3D" id="SphereShape3D_4flbx"]
 radius = 0.060926095
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_a3d8c"]
+
 [node name="Player" type="CharacterBody3D"]
+collision_mask = 30
 script = ExtResource("1_v0iea")
 
 [node name="DrillBugJ" type="Node3D" parent="."]
@@ -459,3 +462,11 @@ debug_color = Color(0, 1.1529665, 0.42423928, 1)
 transform = Transform3D(1, 0, 0, 0, 0.9611269, 0.27610713, 0, -0.27610713, 0.9611269, 0, 0.18038769, 0.18817201)
 script = ExtResource("2_onrkg")
 pivot = NodePath("..")
+
+[node name="InteractCast" type="ShapeCast3D" parent="Camera Pivot"]
+shape = SubResource("SphereShape3D_a3d8c")
+target_position = Vector3(0, 0, -0.5)
+max_results = 8
+collision_mask = 32
+collide_with_areas = true
+collide_with_bodies = false
