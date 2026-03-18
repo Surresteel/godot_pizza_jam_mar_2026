@@ -85,8 +85,12 @@ func follow_path(current_velcoity: Vector3, path: Array[WayPoint], length: float
 	var wrong_way: bool = false
 	if -global_basis.z.dot((closest_point.next_waypoint.global_position 
 			- closest_point.Start_wayPoint.global_position).normalized()) < 0:
-				wrong_way = false
-	
+				wrong_way = true
+	if wrong_way:
+		path_line.clear_surfaces()
+		futurenormal_line.clear_surfaces()
+		_render_line(current_velcoity,velocity_line,Color.GREEN)
+		return (global_basis.x) * 5
 	
 	
 	if closest_point_distance > closest_point.path_radius:
@@ -97,12 +101,12 @@ func follow_path(current_velcoity: Vector3, path: Array[WayPoint], length: float
 		_render_line(target_pos - global_position,futurenormal_line,Color.BLUE)
 		_render_line(current_velcoity,velocity_line,Color.GREEN)
 		return steer
-	else:
-		path_line.clear_surfaces()
-		futurenormal_line.clear_surfaces()
-		_render_line(current_velcoity,velocity_line,Color.GREEN)
-		
-		return get_steering_force(closest_point.next_waypoint.global_position,current_velcoity) 
+	
+	
+	path_line.clear_surfaces()
+	futurenormal_line.clear_surfaces()
+	_render_line(current_velcoity,velocity_line,Color.GREEN)
+	return global_basis.z * 0.1
 
 
 ## seperation

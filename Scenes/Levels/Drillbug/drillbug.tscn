@@ -466,7 +466,6 @@ libraries = {
 [node name="Steering Behaviour" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04749272, 0)
 script = ExtResource("2_jipot")
-draw_lines = true
 desired_seperation = 1.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
