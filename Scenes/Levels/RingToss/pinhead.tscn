@@ -1,5 +1,7 @@
 [gd_scene load_steps=17 format=4 uid="uid://bditd87hlacqi"]
 
+[ext_resource type="PackedScene" uid="uid://cn42sgj81veos" path="res://Scenes/General/interactable.tscn" id="1_j6dyn"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ksbj2"]
 radius = 0.073
 height = 0.501
@@ -360,9 +362,6 @@ radius = 0.3
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ksbj2"]
 points = PackedVector3Array(0.3, 0.625, 0, 0, 0.625, 0.3, -0.3, 0.625, 0, 0, 0.625, -0.3, 0, 1, 0)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_j6dyn"]
-size = Vector3(0.1, 0.45, 0.1)
 
 [node name="Pinhead" type="CharacterBody3D"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
@@ -750,7 +749,5 @@ shape = SubResource("CylinderShape3D_ksbj2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
 shape = SubResource("ConvexPolygonShape3D_ksbj2")
 
-[node name="ColHead" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.724, 0)
-shape = SubResource("BoxShape3D_j6dyn")
-disabled = true
+[node name="Interactable" parent="." instance=ExtResource("1_j6dyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1555404e-07, 1.2395821, 1.1020554)

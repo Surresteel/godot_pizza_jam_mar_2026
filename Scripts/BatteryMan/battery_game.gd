@@ -8,6 +8,9 @@ extends StaticBody3D
 #===============================================================================
 #	CLASS MEMBERS:
 #===============================================================================
+# ANIMATION:
+@onready var _anim_player: AnimationPlayer = \
+		$StrengthTesterAnimations/AnimationPlayer
 
 # AUDIO:
 #const SFX_HIT: AudioStreamWAV = TBD
@@ -18,6 +21,12 @@ extends StaticBody3D
 @onready var area: Area3D = $Target
 @onready var bar: Node3D = $Bar
 var _is_animating: bool = false
+
+# GAME:
+@onready var puck: Node3D = $StrengthTesterAnimations/Puck
+const PUCK_MIN_Y: float = 0.624
+const PUCK_MAX_Y: float = 3.285
+const PUCK_DIST: float = PUCK_MAX_Y - PUCK_MIN_Y
 
 
 #===============================================================================
@@ -69,6 +78,9 @@ func batteryman_hit() -> void:
 #===============================================================================
 #	FUNCTIONS - ANIMATIONS:
 #===============================================================================
+func _play_anim(anim: String, blend: float = 1, play_spd: float = 1.0) -> void:
+	_anim_player.play(anim, blend, play_spd)
+
 
 # Animates the bar according to strength:
 func _animate_bar(strength: float, duration: float = 1.5):
@@ -78,15 +90,24 @@ func _animate_bar(strength: float, duration: float = 1.5):
 	
 	# Toggle _is_animating:
 	_is_animating = true
+	_play_anim("Bell Hit destroy")
 	
 	# Create grow tween:
 	var tween = create_tween()
-	tween.tween_property(bar, "scale", Vector3(1, strength, 1), duration)\
+	tween.tween_property(bar, "scale", Vector3(1, strength, 1), duration/2)\
+			.set_trans(Tween.TRANS_QUAD)\
+			.set_ease(Tween.EASE_OUT)
+	var pos := PUCK_MIN_Y + PUCK_DIST * strength
+	tween.parallel().tween_property(puck, "global_position:y", pos, duration/2)\
 			.set_trans(Tween.TRANS_QUAD)\
 			.set_ease(Tween.EASE_OUT)
 	
 	# Create shrink tween:
 	tween.tween_property(bar, "scale", Vector3(1, 0, 1), duration)\
+			.set_trans(Tween.TRANS_QUAD)\
+			.set_ease(Tween.EASE_IN)
+	pos = PUCK_MIN_Y
+	tween.parallel().tween_property(puck, "global_position:y", pos, duration)\
 			.set_trans(Tween.TRANS_QUAD)\
 			.set_ease(Tween.EASE_IN)
 	

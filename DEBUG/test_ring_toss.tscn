@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmgncqdk1nkoc"]
+[gd_scene load_steps=9 format=3 uid="uid://cmgncqdk1nkoc"]
 
 [ext_resource type="PackedScene" uid="uid://cydpqbfsf6gqe" path="res://Scenes/Levels/RingToss/ring_tosser_player.tscn" id="1_pxtx1"]
-[ext_resource type="PackedScene" uid="uid://b2hlu4il2fp0w" path="res://Scenes/Levels/RingToss/ring_target.tscn" id="2_01tie"]
 [ext_resource type="PackedScene" uid="uid://bditd87hlacqi" path="res://Scenes/Levels/RingToss/pinhead.tscn" id="3_3bqjx"]
+[ext_resource type="PackedScene" uid="uid://b5vll7kehv7s2" path="res://Scenes/Levels/RingToss/ring_stand.tscn" id="3_07khs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bsewn"]
 sky_top_color = Color(0.21986955, 0.4442706, 0.7686731, 1)
@@ -16,10 +16,6 @@ sky_material = SubResource("ProceduralSkyMaterial_bsewn")
 [sub_resource type="Environment" id="Environment_pxtx1"]
 background_mode = 2
 sky = SubResource("Sky_hl1mb")
-
-[sub_resource type="BoxMesh" id="BoxMesh_3bqjx"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_07khs"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_07khs"]
 map_width = 50
@@ -39,32 +35,10 @@ transform = Transform3D(0.6972839, 0.33942628, -0.6313359, 0.5257242, -0.8408853
 shadow_enabled = true
 
 [node name="RingTosserPlayer" parent="." instance=ExtResource("1_pxtx1")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.7421794, -0.89989567)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.51923513, 3.4586093)
-collision_layer = 16
-collision_mask = 15
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_3bqjx")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7336381, 1.4293125)
-mesh = SubResource("BoxMesh_3bqjx")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_07khs")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.731297, 1.4363282)
-shape = SubResource("BoxShape3D_07khs")
-
-[node name="RingTarget" parent="." instance=ExtResource("2_01tie")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 0.99984884, 3.2276196)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.458019, 0.6522052)
 
 [node name="Pinhead" parent="." instance=ExtResource("3_3bqjx")]
-transform = Transform3D(-0.84319454, 0, 0.5376086, 0, 1, 0, -0.5376086, 0, -0.84319454, -1.6829152, 2.3841858e-07, 2.0742397)
+transform = Transform3D(-0.844814, 0, 0.5350602, 0, 1, 0, -0.5350602, 0, -0.844814, -0.8828671, -0.63120663, 2.4254048)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 collision_layer = 16
@@ -75,3 +49,6 @@ shape = SubResource("HeightMapShape3D_07khs")
 
 [node name="MeshFloor" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("PlaneMesh_yobxv")
+
+[node name="RingStand" parent="." instance=ExtResource("3_07khs")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 3.366216)

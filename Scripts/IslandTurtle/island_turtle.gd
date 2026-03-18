@@ -20,6 +20,7 @@ extends StaticBody3D
 
 # Node initialisation:
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	island_area.body_exited.connect(_on_body_exit)
 
 

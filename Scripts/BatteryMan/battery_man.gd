@@ -8,6 +8,9 @@ extends CharacterBody3D
 #===============================================================================
 #	CLASS MEMBERS:
 #===============================================================================
+# ANIMATION:
+@onready var _anim_player: AnimationPlayer = \
+		$BatteryManAnimationsDone/AnimationPlayer
 
 # AUDIO:
 const SFX_HIT: AudioStreamWAV = preload("uid://dbhjs0rmy65cb")
@@ -36,25 +39,34 @@ var state_change: bool = false
 
 # Node initialisation:
 func _ready() -> void:
-	cur_state = STATE.MOVE_IDLE
 	interactable.activated.connect(_activate_game)
 	GameManager.game_change.connect(_on_game_change)
+	cur_state = STATE.MOVE_IDLE
+	_anim_player.animation_finished.connect(_return_to_idle)
+	state_change = true
 
 
 func _process(delta: float) -> void:
 	match cur_state:
 		STATE.IDLE:
 			if state_change:
+				_play_anim("HammerIdle")
 				global_basis = node_idle.global_basis
 				state_change = false
-			
-			# TODO: Idle stuff
 		STATE.MOVE_GAME:
+			if state_change:
+				_play_anim("Walk")
+				state_change = false
+				
 			_apply_gravity(delta)
 			if _go_to_point(delta, node_game.global_position):
 				cur_state = STATE.GAME
 				state_change = true
 		STATE.MOVE_IDLE:
+			if state_change:
+				_play_anim("Walk")
+				state_change = false
+			
 			_apply_gravity(delta)
 			if _go_to_point(delta, node_idle.global_position):
 				cur_state = STATE.IDLE
@@ -97,24 +109,21 @@ func _play_game() -> void:
 		game_ongoing = false
 		return
 	
-	# Configure tween:
-	var tween = create_tween()
-	var target_angle = deg_to_rad(-76)
-	tween.tween_property(self, "rotation:x", target_angle, 0.2) \
-			.set_trans(Tween.TRANS_QUAD) \
-			.set_ease(Tween.EASE_OUT)
-	
 	# Hit target:
-	tween.tween_callback(func(): 
-		game.batteryman_hit()
-		_play_audio(SFX_HIT))
-	
-	tween.tween_property(self, "rotation:x", 0, 0.4) \
-			.set_trans(Tween.TRANS_QUAD) \
-			.set_ease(Tween.EASE_OUT)
-	
-	# End game:
-	tween.finished.connect(func(): game_ongoing = false)
+	_play_anim("Swing")
+	# NOTE: This animation calls _hit_target():
+
+
+# This function is called by Batteryman's swing animation:
+func _hit_target() -> void:
+	game.batteryman_hit()
+	_play_audio(SFX_HIT)
+
+
+# Returns batteryman to idle pos after swing is done:
+func _return_to_idle(anim: String) -> void:
+	if  anim == "Swing":
+		game_ongoing = false
 
 
 #===============================================================================
@@ -203,3 +212,11 @@ func _play_audio(resource, override: bool = true) -> void:
 	audio_player.play()
 	
 	return
+
+
+#===============================================================================
+#	ANIMATIONS:
+#===============================================================================
+func _play_anim(anim: String, blend: float = 1, play_spd: float = 1.0) -> void:
+	_anim_player.play(anim, blend, play_spd)
+	#_anim_player.queue("Swimming")

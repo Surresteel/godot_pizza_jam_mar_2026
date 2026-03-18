@@ -139,7 +139,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_pressed("hit"):
 		charging = true
 		charge -= event.relative.y * 0.01
-		print(charge)
 	else:
 		var hor: float = sensitivity_mouse * -event.relative.x
 		var vert: float = sensitivity_mouse * -event.relative.y

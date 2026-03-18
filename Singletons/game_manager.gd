@@ -32,33 +32,6 @@ func switch_game(new_game: GAME):
 	if new_game == current_game:
 		return
 	
-	# Handle exit game code:
-	#match current_game:
-	#	GAME.NONE:
-	#		player.process_mode = Node.PROCESS_MODE_DISABLED
-	#	GAME.TURTLE:
-	#		pass
-	#	GAME.HAMMER:
-	#		pass
-	#	GAME.RING:
-	#		pass
-	#	GAME.DRILL:
-	#		pass
-	
-	# Handle enter game code:
-	#match new_game:
-	#	GAME.NONE:
-	#		player.process_mode = Node.PROCESS_MODE_INHERIT
-	#		player.camera.make_current()
-	#	GAME.TURTLE:
-	#		pass
-	#	GAME.HAMMER:
-	#		pass
-	#	GAME.RING:
-	#		pass
-	#	GAME.DRILL:
-	#		pass
-	
 	# Update game:
 	print("changing state")
 	game_change.emit(current_game, new_game)
