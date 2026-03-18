@@ -1,39 +1,38 @@
 #===============================================================================
 #	CLASS PROPERTIES:
 #===============================================================================
-extends Node
+class_name Rain
+extends GPUParticles3D
 
 
 #===============================================================================
 #	CLASS MEMBERS:
 #===============================================================================
 # PLAYER:
-var player: Player = null
-
-# GAME STATE:
-enum GAME{NONE, TURTLE, HAMMER, RING, DRILL}
-signal game_change(old: GAME, new: GAME)
-var current_game := GAME.NONE
+var cur_cam: Camera3D = null
 
 
 #===============================================================================
 #	CALLBACKS:
 #===============================================================================
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	cur_cam = get_viewport().get_camera_3d()
+	GameManager.game_change.connect(_get_active_cam)
 
 
-#===============================================================================
-#	FUNCTIONS - STATE:
-#===============================================================================
-# Switches to a different game:
-func switch_game(new_game: GAME):
-	# GATE - new game must be different from current:
-	if new_game == current_game:
-		return
+func _process(_delta: float) -> void:
+	if not cur_cam:
+		cur_cam = get_viewport().get_camera_3d()
+		if not cur_cam:
+			global_position = Vector3.ZERO
+			return
 	
-	# Update game:
-	print("changing state")
-	game_change.emit(current_game, new_game)
-	current_game = new_game
-	return
+	global_position = cur_cam.global_position
+
+
+#===============================================================================
+#	FUNCTIONS - MOVEMENT:
+#===============================================================================
+# Gets the active camera after a game switch:
+func _get_active_cam(_old: GameManager.GAME, _new: GameManager.GAME) -> void:
+	return get_viewport().get_camera_3d()

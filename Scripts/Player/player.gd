@@ -18,6 +18,9 @@ class_name Player
 @export var fall_speed := 1.0
 @export var turn_rate: float = 8.0
 
+# INVENTORY:
+var inv := PlayerInventory
+
 
 #===============================================================================
 #	CALLBACKS:

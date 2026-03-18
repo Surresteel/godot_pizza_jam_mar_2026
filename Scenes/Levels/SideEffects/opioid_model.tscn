@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkst15qx4l5r3"]
+
+[ext_resource type="Script" uid="uid://b5i2u1eu5ruo3" path="res://Scripts/SideEffects/opioid_model.gd" id="1_8ljti"]
+[ext_resource type="PackedScene" uid="uid://cn42sgj81veos" path="res://Scenes/General/interactable.tscn" id="2_38mak"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_saswj"]
+radius = 0.025
+height = 0.1
+
+[node name="OpioidModel" type="Node3D"]
+script = ExtResource("1_8ljti")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.025102388, 0)
+mesh = SubResource("CapsuleMesh_saswj")
+
+[node name="Interactable" parent="." node_paths=PackedStringArray("owner_node") instance=ExtResource("2_38mak")]
+owner_node = NodePath("..")
+message = "Store Opioid"
+radius = 0.25

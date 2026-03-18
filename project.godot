@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://Singletons/game_manager.gd"
+PlayerInventory="*res://Singletons/player_inventory.gd"
+WeatherManager="*res://Singletons/weather_manager.gd"
 
 [display]
 

@@ -229,16 +229,17 @@ bind/28/bone = -1
 bind/28/pose = Transform3D(0.9200969, -0.21121362, 0.32986468, -0.39112172, -0.45003527, 0.80280346, -0.021112023, -0.86767346, -0.4966872, 0.037555058, 0.03945476, 0.09119057)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4flbx"]
-radius = 0.060926095
+radius = 0.186
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_a3d8c"]
+radius = 0.2
 
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 30
 script = ExtResource("1_v0iea")
 
 [node name="DrillBugJ" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 
 [node name="Armature" type="Node3D" parent="DrillBugJ"]
 
@@ -452,18 +453,19 @@ mesh = SubResource("ArrayMesh_bal25")
 skin = SubResource("Skin_ti7jt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.054079115, 0.0008879006)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.189, 0.001)
 shape = SubResource("SphereShape3D_4flbx")
 debug_color = Color(0, 1.1529665, 0.42423928, 1)
 
 [node name="Camera Pivot" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Camera Pivot" node_paths=PackedStringArray("pivot")]
-transform = Transform3D(1, 0, 0, 0, 0.9611269, 0.27610713, 0, -0.27610713, 0.9611269, 0, 0.18038769, 0.18817201)
+transform = Transform3D(1, 0, 0, 0, 0.9611269, 0.27610713, 0, -0.27610713, 0.9611269, 0, 0.56073225, 0.5141556)
 script = ExtResource("2_onrkg")
 pivot = NodePath("..")
 
 [node name="InteractCast" type="ShapeCast3D" parent="Camera Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("SphereShape3D_a3d8c")
 target_position = Vector3(0, 0, -0.5)
 max_results = 8

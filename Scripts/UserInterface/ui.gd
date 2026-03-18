@@ -1,39 +1,38 @@
 #===============================================================================
 #	CLASS PROPERTIES:
 #===============================================================================
-extends Node
+class_name UserInterface
+extends CanvasLayer
 
 
 #===============================================================================
 #	CLASS MEMBERS:
 #===============================================================================
-# PLAYER:
-var player: Player = null
-
-# GAME STATE:
-enum GAME{NONE, TURTLE, HAMMER, RING, DRILL}
-signal game_change(old: GAME, new: GAME)
-var current_game := GAME.NONE
+# UI ELEMENTS:
+@onready var fade_rect: ColorRect = $FadeOut
 
 
 #===============================================================================
 #	CALLBACKS:
 #===============================================================================
+# Node initialisation:
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	WeatherManager.weather_change.connect(_on_weather_changed)
+	pass
+
+
+# Trigger fade out / in on weather change:
+func _on_weather_changed(_old: WeatherManager.WEATHER, 
+		_new: WeatherManager.WEATHER) -> void:
+	fade_out_in(1.0, 0.0, 1.0)
 
 
 #===============================================================================
-#	FUNCTIONS - STATE:
+#	FUNCTIONS - TRANSITIONS:
 #===============================================================================
-# Switches to a different game:
-func switch_game(new_game: GAME):
-	# GATE - new game must be different from current:
-	if new_game == current_game:
-		return
-	
-	# Update game:
-	print("changing state")
-	game_change.emit(current_game, new_game)
-	current_game = new_game
-	return
+# Fades the screen to black and back again:
+func fade_out_in(t_out: float, t_hold: float, t_in: float) -> void:
+	var tween = create_tween()
+	tween.tween_property(fade_rect, "modulate:a", 1.0, t_out).from(0.0)
+	tween.tween_interval(t_hold)
+	tween.tween_property(fade_rect, "modulate:a", 0.0, t_in)

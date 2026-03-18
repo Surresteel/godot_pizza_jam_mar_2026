@@ -1761,5 +1761,6 @@ shape = SubResource("CylinderShape3D_32xpd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8121909, 0)
 bus = &"SFX"
 
-[node name="Interactable" parent="." instance=ExtResource("2_y3hky")]
+[node name="Interactable" parent="." node_paths=PackedStringArray("owner_node") instance=ExtResource("2_y3hky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0501775, -1.2040844)
+owner_node = NodePath("..")

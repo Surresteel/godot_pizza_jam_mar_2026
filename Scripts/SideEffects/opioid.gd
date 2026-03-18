@@ -1,39 +1,32 @@
 #===============================================================================
 #	CLASS PROPERTIES:
 #===============================================================================
-extends Node
+class_name Opioid
+extends Item
 
 
 #===============================================================================
 #	CLASS MEMBERS:
 #===============================================================================
-# PLAYER:
-var player: Player = null
-
-# GAME STATE:
-enum GAME{NONE, TURTLE, HAMMER, RING, DRILL}
-signal game_change(old: GAME, new: GAME)
-var current_game := GAME.NONE
+# TRAITS:
+var stat_multi: float = 1.5
 
 
 #===============================================================================
 #	CALLBACKS:
 #===============================================================================
+# Node Initialisation:
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	item_name = "Opioid"
 
 
 #===============================================================================
-#	FUNCTIONS - STATE:
+#	FUNCTIONS - ITEM:
 #===============================================================================
-# Switches to a different game:
-func switch_game(new_game: GAME):
-	# GATE - new game must be different from current:
-	if new_game == current_game:
+# Gets the target to take drugs:
+func use(_user: Node = null, target: Node = null) -> void:
+	# GATE - target must exist:
+	if not target or not target.has_method("take_drugs"):
 		return
 	
-	# Update game:
-	print("changing state")
-	game_change.emit(current_game, new_game)
-	current_game = new_game
-	return
+	target.take_drugs(self)
