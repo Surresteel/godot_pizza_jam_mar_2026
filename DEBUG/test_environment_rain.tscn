@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdfj4pia5q1xk"]
+[gd_scene load_steps=11 format=3 uid="uid://bdfj4pia5q1xk"]
 
 [ext_resource type="Texture2D" uid="uid://caymhtcwoo87c" path="res://Materials/Debug_Grid.png" id="1_bem8d"]
 [ext_resource type="Script" uid="uid://dri1djnoi3gf3" path="res://DEBUG/weather_test.gd" id="1_i7lkw"]
 [ext_resource type="PackedScene" uid="uid://dkst15qx4l5r3" path="res://Scenes/Levels/SideEffects/opioid_model.tscn" id="2_nsk6j"]
 [ext_resource type="PackedScene" uid="uid://b5vll7kehv7s2" path="res://Scenes/Levels/RingToss/ring_stand.tscn" id="3_rb4c2"]
 [ext_resource type="PackedScene" uid="uid://dro61sv4qfhvd" path="res://Scenes/Player/player.tscn" id="4_i7lkw"]
+[ext_resource type="PackedScene" uid="uid://juxhxwkh2e5o" path="res://Scenes/Levels/CopyCat/cc_pen.tscn" id="6_i7lkw"]
 [ext_resource type="PackedScene" uid="uid://bqo333sarjbl7" path="res://Scenes/UserInterface/ui.tscn" id="6_rb4c2"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_k7yqj"]
@@ -39,5 +40,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3835917, 2.3841858e-07, -5.
 
 [node name="RingStand" parent="." instance=ExtResource("3_rb4c2")]
 
+[node name="CCPen" parent="." instance=ExtResource("6_i7lkw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.069784164, 0, 6.441803)
+
 [node name="Player" parent="." instance=ExtResource("4_i7lkw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6087353, 11.357692)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3093204, 4.7683716e-07, 9.562495)

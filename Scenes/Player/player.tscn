@@ -461,6 +461,7 @@ debug_color = Color(0, 1.1529665, 0.42423928, 1)
 
 [node name="Camera3D" type="Camera3D" parent="Camera Pivot" node_paths=PackedStringArray("pivot")]
 transform = Transform3D(1, 0, 0, 0, 0.9611269, 0.27610713, 0, -0.27610713, 0.9611269, 0, 0.56073225, 0.5141556)
+current = true
 script = ExtResource("2_onrkg")
 pivot = NodePath("..")
 

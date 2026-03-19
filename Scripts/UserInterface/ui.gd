@@ -10,6 +10,8 @@ extends CanvasLayer
 #===============================================================================
 # UI ELEMENTS:
 @onready var fade_rect: ColorRect = $FadeOut
+@onready var game_ui_none: Control = $GameUINone
+@onready var interact_prompt: Label = $GameUINone/InteractPrompt
 
 
 #===============================================================================
@@ -17,6 +19,7 @@ extends CanvasLayer
 #===============================================================================
 # Node initialisation:
 func _ready() -> void:
+	GameManager.game_change.connect(_on_game_change)
 	WeatherManager.weather_change.connect(_on_weather_changed)
 	pass
 
@@ -25,6 +28,28 @@ func _ready() -> void:
 func _on_weather_changed(_old: WeatherManager.WEATHER, 
 		_new: WeatherManager.WEATHER) -> void:
 	fade_out_in(1.0, 0.0, 1.0)
+
+
+#===============================================================================
+#	FUNCTIONS - LAYOUT:
+#===============================================================================
+# Changes the user interface based on which game is active:
+func _on_game_change(_old: GameManager.GAME, new: GameManager.GAME) -> void:
+	match new:
+		GameManager.GAME.NONE:
+			game_ui_none.visible = true
+		GameManager.GAME.HAMMER:
+			game_ui_none.visible = false
+		GameManager.GAME.RING:
+			game_ui_none.visible = false
+		GameManager.GAME.DRILL:
+			game_ui_none.visible = false
+
+
+# Updates the interact prompt:
+func update_interact_prompt(msg: String = "", vis: bool = true) -> void:
+	interact_prompt.text = msg
+	interact_prompt.visible = vis
 
 
 #===============================================================================

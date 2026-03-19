@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://juxhxwkh2e5o"]
+
+[ext_resource type="PackedScene" uid="uid://dju2d1tvpbl1y" path="res://Scenes/General/fence.tscn" id="1_lnd5i"]
+[ext_resource type="Script" uid="uid://b0qyg8m6drbwv" path="res://Scripts/CopyCat/cc_pen.gd" id="1_snivy"]
+[ext_resource type="PackedScene" uid="uid://d8xitqf4tjwv" path="res://Scenes/Levels/CopyCat/cc_cage.tscn" id="3_kw1m3"]
+[ext_resource type="PackedScene" uid="uid://cn42sgj81veos" path="res://Scenes/General/interactable.tscn" id="4_qipmn"]
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_s1mhk"]
+map_width = 7
+map_depth = 7
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="CCPen" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 15
+script = ExtResource("1_snivy")
+
+[node name="Floor" type="CollisionShape3D" parent="."]
+shape = SubResource("HeightMapShape3D_s1mhk")
+
+[node name="Fence" parent="." instance=ExtResource("1_lnd5i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.621109)
+
+[node name="Fence2" parent="." instance=ExtResource("1_lnd5i")]
+transform = Transform3D(0.54919785, 0, 0.83569235, 0, 1, 0, -0.83569235, 0, 0.54919785, 2.0289, -2.3841858e-07, 1.4335546)
+
+[node name="Fence3" parent="." instance=ExtResource("1_lnd5i")]
+transform = Transform3D(-0.26720467, 0, 0.9636398, 0, 1, 0, -0.9636398, 0, -0.26720467, 2.3424232, 0, -1.0058091)
+
+[node name="Fence4" parent="." instance=ExtResource("1_lnd5i")]
+transform = Transform3D(-0.99982274, 0, -0.018830905, 0, 1, 0, 0.018830905, 0, -0.99982274, 0.9569503, -2.3841858e-07, -2.4594493)
+
+[node name="Fence5" parent="." instance=ExtResource("1_lnd5i")]
+transform = Transform3D(-0.06059572, 0, -0.9981624, 0, 1, 0, 0.9981624, 0, -0.06059572, -2.8501806, -2.3841858e-07, -0.10586953)
+
+[node name="Fence7" parent="." instance=ExtResource("1_lnd5i")]
+transform = Transform3D(-0.9129126, 0, -0.40815508, 0, 1, 0, 0.40815508, 0, -0.9129126, -1.736604, -2.3841858e-07, -1.9571294)
+
+[node name="Fence6" parent="." instance=ExtResource("1_lnd5i")]
+transform = Transform3D(0.6725734, 0, -0.74003047, 0, 1, 0, 0.74003047, 0, 0.6725734, -2.202534, -2.3841858e-07, 2.1914225)
+
+[node name="Cam" type="Camera3D" parent="."]
+transform = Transform3D(0.6090245, 0.42575124, -0.6691973, 3.1712712e-08, 0.8437195, 0.53678435, 0.79315144, -0.32691485, 0.5138458, -2.9273267, 1.7565266, 2.2438264)
+
+[node name="CCCage" parent="." instance=ExtResource("3_kw1m3")]
+transform = Transform3D(-0.65331507, 0, -0.75708634, 0, 1, 0, 0.75708634, 0, -0.65331507, -3.9940052, -0.028785467, 0.35893917)
+
+[node name="Spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8510443, 0)
+
+[node name="Interactable" parent="." node_paths=PackedStringArray("owner_node") instance=ExtResource("4_qipmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.948334, 0.846815, 0)
+owner_node = NodePath("..")
+message = "Play Copycat"

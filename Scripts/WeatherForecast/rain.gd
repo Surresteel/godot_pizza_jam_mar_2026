@@ -35,4 +35,5 @@ func _process(_delta: float) -> void:
 #===============================================================================
 # Gets the active camera after a game switch:
 func _get_active_cam(_old: GameManager.GAME, _new: GameManager.GAME) -> void:
-	return get_viewport().get_camera_3d()
+	#await get_tree().create_timer(2).timeout
+	cur_cam = get_viewport().get_camera_3d()

@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://cr75yplaeq4ei"]
+
+[ext_resource type="Script" uid="uid://qqk4yu2skx4n" path="res://Scripts/CopyCat/cc_animal.gd" id="1_ek70w"]
+[ext_resource type="PackedScene" uid="uid://cn42sgj81veos" path="res://Scenes/General/interactable.tscn" id="2_hpvi3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j571n"]
+radius = 0.125
+height = 0.98
+
+[sub_resource type="BoxMesh" id="BoxMesh_ek70w"]
+size = Vector3(0.25, 0.25, 0.5)
+
+[sub_resource type="PrismMesh" id="PrismMesh_ktjcm"]
+left_to_right = 0.8
+size = Vector3(0.25, 0.1, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w75y3"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_bl442"]
+material = SubResource("StandardMaterial3D_w75y3")
+radius = 0.025
+height = 0.05
+radial_segments = 8
+rings = 8
+
+[sub_resource type="TorusMesh" id="TorusMesh_5xhyk"]
+inner_radius = 0.05
+outer_radius = 0.005
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_geab5"]
+albedo_color = Color(0.6, 0.4028, 0.396, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4hnvr"]
+material = SubResource("StandardMaterial3D_geab5")
+top_radius = 0.002
+bottom_radius = 0.05
+height = 0.5
+
+[node name="CCAnimal" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 31
+script = ExtResource("1_ek70w")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.126, 0.16)
+shape = SubResource("CapsuleShape3D_j571n")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+mesh = SubResource("BoxMesh_ek70w")
+
+[node name="Head" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, -0.3)
+mesh = SubResource("PrismMesh_ktjcm")
+
+[node name="EyeL" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05252734, -0.0114097595, -0.056113906)
+mesh = SubResource("SphereMesh_bl442")
+
+[node name="EyeR" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.053, -0.011, 0.056)
+mesh = SubResource("SphereMesh_bl442")
+
+[node name="EarL" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12512337, -0.078603074, -0.12562409)
+mesh = SubResource("TorusMesh_5xhyk")
+
+[node name="EarR" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125, -0.078, 0.126)
+mesh = SubResource("TorusMesh_5xhyk")
+
+[node name="Tail" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0.243)
+
+[node name="TailModel" type="MeshInstance3D" parent="Body/Tail"]
+transform = Transform3D(0.99999994, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, -0.0015414134, 0.23635617)
+mesh = SubResource("CylinderMesh_4hnvr")
+skeleton = NodePath("../..")
+
+[node name="Interactable" parent="." node_paths=PackedStringArray("owner_node") instance=ExtResource("2_hpvi3")]
+owner_node = NodePath("..")
+message = "Select"
+radius = 0.5

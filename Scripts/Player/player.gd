@@ -27,8 +27,8 @@ var inv := PlayerInventory
 #===============================================================================
 # Node initialisation:
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	GameManager.game_change.connect(_on_game_change)
+	_disable_node()
 
 
 func _physics_process(delta: float) -> void:
@@ -106,17 +106,29 @@ func _align_character(delta: float) -> void:
 #	FUNCTIONS - LIFECYCLE:
 #===============================================================================
 # Handles node lifecycle as game state changes:
-func _on_game_change(_old: GameManager.GAME, new: GameManager.GAME) -> void:
+func _on_game_change(old: GameManager.GAME, new: GameManager.GAME) -> void:
 	if new == GameManager.GAME.NONE:
+		_enable_node()
+	elif old == GameManager.GAME.NONE:
+		_disable_node()
+
+
+# Enables the player:
+func _enable_node() -> void:
 		print("none enabled")
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		self.process_mode = Node.PROCESS_MODE_INHERIT
 		self.visible = true
 		camera.make_current()
-	else:
+
+
+# Disables the player:
+func _disable_node() -> void:
 		print("none disabled")
 		self.process_mode = Node.PROCESS_MODE_DISABLED
 		self.visible = false
 		camera.clear_current()
+		UiManager.update_interact_prompt("", false)
 
 
 #===============================================================================
@@ -126,9 +138,16 @@ func _on_game_change(_old: GameManager.GAME, new: GameManager.GAME) -> void:
 func _check_interactables() -> void:
 	# GATE - must be colliding with something:
 	if interact.get_collision_count() == 0:
+		UiManager.update_interact_prompt("", false)
 		return
 	
-	#print("Can Interact!")
+	# GATE - collision object must be interactable:
+	var interactable: Object = interact.get_collider(0)
+	if interactable is not Interactable:
+		return
+	interactable = interactable as Interactable
+	
+	UiManager.update_interact_prompt(interactable.message, true)
 	
 	return
 

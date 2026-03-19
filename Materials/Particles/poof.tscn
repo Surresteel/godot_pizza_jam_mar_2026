@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdjjluy1thota"]
+
+[ext_resource type="Script" uid="uid://dwcqgkcyy7qp1" path="res://Materials/Particles/poof.gd" id="1_133p4"]
+
+[sub_resource type="Curve" id="Curve_v600i"]
+_data = [Vector2(0, 0.011235952), 0.0, 2.619583, 0, 0, Vector2(0.6041667, 1), 0.0, 0.0, 0, 0, Vector2(0.99583334, 0), -11.056191, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hehdw"]
+curve = SubResource("Curve_v600i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wmp5f"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, 1, 0)
+linear_accel_min = -1.0000023
+linear_accel_max = -1.0000023
+scale_min = 0.099999994
+scale_curve = SubResource("CurveTexture_hehdw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4f4d"]
+albedo_color = Color(0.20154718, 0.21634555, 0.27883404, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qfiyl"]
+material = SubResource("StandardMaterial3D_l4f4d")
+radius = 0.2
+height = 0.4
+
+[node name="Poof" type="GPUParticles3D"]
+emitting = false
+amount = 25
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wmp5f")
+draw_pass_1 = SubResource("SphereMesh_qfiyl")
+script = ExtResource("1_133p4")

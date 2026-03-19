@@ -11,9 +11,9 @@ extends Node
 var player: Player = null
 
 # GAME STATE:
-enum GAME{NONE, TURTLE, HAMMER, RING, DRILL}
+enum GAME{NONE, TURTLE, HAMMER, COPYCAT, RING, DRILL}
 signal game_change(old: GAME, new: GAME)
-var current_game := GAME.NONE
+var current_game := -1
 
 
 #===============================================================================
