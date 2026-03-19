@@ -57,13 +57,11 @@ func _process(delta: float) -> void:
 # Handles node lifecycle as game state changes:
 func _on_game_change(old: GameManager.GAME, new: GameManager.GAME) -> void:
 	if new == GameManager.GAME.HAMMER:
-		print("hammer enabled")
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		self.process_mode = Node.PROCESS_MODE_INHERIT
 		self.visible = true
 		cam.make_current()
 	elif old == GameManager.GAME.HAMMER:
-		print("hammer disabled")
 		self.process_mode = Node.PROCESS_MODE_DISABLED
 		self.visible = false
 		cam.clear_current()

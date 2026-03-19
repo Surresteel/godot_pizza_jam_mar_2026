@@ -33,7 +33,6 @@ func switch_game(new_game: GAME):
 		return
 	
 	# Update game:
-	print("changing state")
 	game_change.emit(current_game, new_game)
 	current_game = new_game
 	return

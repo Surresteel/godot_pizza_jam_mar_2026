@@ -1,10 +1,15 @@
-[gd_scene load_steps=17 format=4 uid="uid://bditd87hlacqi"]
+[gd_scene load_steps=19 format=4 uid="uid://bditd87hlacqi"]
 
 [ext_resource type="PackedScene" uid="uid://cn42sgj81veos" path="res://Scenes/General/interactable.tscn" id="1_j6dyn"]
+[ext_resource type="Script" uid="uid://b7xyeaxhcm3qw" path="res://Scripts/RingToss/pinhead.gd" id="1_jwx0v"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ksbj2"]
-radius = 0.073
-height = 0.501
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jwx0v"]
+radius = 0.06
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j6dyn"]
+radius = 0.05
+height = 0.25
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhac6"]
 resource_name = "Material.009"
@@ -367,6 +372,7 @@ points = PackedVector3Array(0.3, 0.625, 0, 0, 0.625, 0.3, -0.3, 0.625, 0, 0, 0.6
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 collision_layer = 2
 collision_mask = 31
+script = ExtResource("1_jwx0v")
 
 [node name="SP0RingTossUnfinished" type="Node3D" parent="."]
 
@@ -728,9 +734,27 @@ collision_mask = 4
 freeze = true
 freeze_mode = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SP0RingTossUnfinished/Armature/Skeleton3D/BoneAttachment3D/RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.064, 0)
-shape = SubResource("CapsuleShape3D_ksbj2")
+[node name="ColHead" type="CollisionShape3D" parent="SP0RingTossUnfinished/Armature/Skeleton3D/BoneAttachment3D/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 1.0587912e-20, 1, 0, 0, 0, 1, 0, -0.07031894, 1.8832225e-10)
+shape = SubResource("CapsuleShape3D_jwx0v")
+
+[node name="KillzoneAft" type="Area3D" parent="SP0RingTossUnfinished/Armature/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(1, 0, 0, 4.2351647e-22, 1, 0, 0, 0, 1, -1.4959974e-15, -0.12942815, -0.125)
+collision_layer = 32
+collision_mask = 4
+
+[node name="ColAft" type="CollisionShape3D" parent="SP0RingTossUnfinished/Armature/Skeleton3D/BoneAttachment3D/KillzoneAft"]
+transform = Transform3D(1, 0, 0, 4.2351647e-22, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_j6dyn")
+
+[node name="KillzoneFwd" type="Area3D" parent="SP0RingTossUnfinished/Armature/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(1, 0, 0, 8.4703295e-22, 1, 0, 0, 0, 1, 2.0567163e-15, -0.12942815, 0.12500001)
+collision_layer = 32
+collision_mask = 4
+
+[node name="ColFwd" type="CollisionShape3D" parent="SP0RingTossUnfinished/Armature/Skeleton3D/BoneAttachment3D/KillzoneFwd"]
+transform = Transform3D(1, 0, 0, 4.2351647e-22, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_j6dyn")
 
 [node name="Pinhead" type="MeshInstance3D" parent="SP0RingTossUnfinished/Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_nwpdn")

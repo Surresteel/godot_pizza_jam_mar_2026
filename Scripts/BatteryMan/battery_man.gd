@@ -73,8 +73,6 @@ func _process(delta: float) -> void:
 				state_change = true
 		STATE.GAME:
 			if state_change:
-				print(global_position)
-				print(node_game.global_position)
 				global_basis = node_game.global_basis
 				game_ongoing = true
 				state_change = false
@@ -146,7 +144,6 @@ func _apply_gravity(delta: float) -> void:
 func _go_to_point(delta:float, point: Vector3) -> bool:
 	# Exit if close to destination:
 	if (global_position - point).length() < 0.1:
-		print("arrived")
 		return true
 	
 	# Move and return:

@@ -37,7 +37,6 @@ func switch_weather(new_weather: WEATHER) -> void:
 		return
 	
 	# Update weather:
-	print("changing weather")
 	weather_change.emit(current_weather, new_weather)
 	_toggle_rain(new_weather == WEATHER.RAIN)
 	current_weather = new_weather

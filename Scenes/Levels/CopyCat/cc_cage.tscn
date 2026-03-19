@@ -1,26 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://d8xitqf4tjwv"]
+[gd_scene load_steps=3 format=3 uid="uid://d8xitqf4tjwv"]
+
+[ext_resource type="PackedScene" uid="uid://dak1ykrrvqcre" path="res://blends/Cage.blend" id="1_em630"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_43jyd"]
 size = Vector3(1.5, 0.1, 1.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4f4o5"]
-albedo_color = Color(0.1029, 0.14573999, 0.21, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_k45tc"]
-material = SubResource("StandardMaterial3D_4f4o5")
-size = Vector3(1.5, 0.1, 1.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wdobl"]
-material = SubResource("StandardMaterial3D_4f4o5")
-size = Vector3(0.2, 1.295, 0.2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_qp4bb"]
-material = SubResource("StandardMaterial3D_4f4o5")
-size = Vector3(0.1, 1.295, 0.1)
-
 [node name="CCCage" type="StaticBody3D"]
 collision_layer = 16
 collision_mask = 15
+
+[node name="Cage2" parent="." instance=ExtResource("1_em630")]
+transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 0, 0, 0)
 
 [node name="ColBase" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
@@ -45,46 +35,6 @@ shape = SubResource("BoxShape3D_43jyd")
 [node name="ColWall4" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.7, 0.75, 0)
 shape = SubResource("BoxShape3D_43jyd")
-
-[node name="MeshBase" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
-mesh = SubResource("BoxMesh_k45tc")
-
-[node name="MeshTop" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-mesh = SubResource("BoxMesh_k45tc")
-
-[node name="MeshBar" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.75, -0.65)
-mesh = SubResource("BoxMesh_wdobl")
-
-[node name="MeshBar2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.75, 0.65)
-mesh = SubResource("BoxMesh_wdobl")
-
-[node name="MeshBar3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.75, 0.65)
-mesh = SubResource("BoxMesh_wdobl")
-
-[node name="MeshBar4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.75, -0.65)
-mesh = SubResource("BoxMesh_wdobl")
-
-[node name="MeshBarThin" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -0.65)
-mesh = SubResource("BoxMesh_qp4bb")
-
-[node name="MeshBarThin2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0.65)
-mesh = SubResource("BoxMesh_qp4bb")
-
-[node name="MeshBarThin3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.75, 0)
-mesh = SubResource("BoxMesh_qp4bb")
-
-[node name="MeshBarThin4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65, 0.75, 0)
-mesh = SubResource("BoxMesh_qp4bb")
 
 [node name="Spawn" type="Node3D" parent="."]
 transform = Transform3D(0.90630776, 0, 0.42261827, 0, 1, 0, -0.42261827, 0, 0.90630776, 0, 0.46, 0)

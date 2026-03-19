@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdfj4pia5q1xk"]
+[gd_scene load_steps=12 format=3 uid="uid://bdfj4pia5q1xk"]
 
 [ext_resource type="Texture2D" uid="uid://caymhtcwoo87c" path="res://Materials/Debug_Grid.png" id="1_bem8d"]
 [ext_resource type="Script" uid="uid://dri1djnoi3gf3" path="res://DEBUG/weather_test.gd" id="1_i7lkw"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b5vll7kehv7s2" path="res://Scenes/Levels/RingToss/ring_stand.tscn" id="3_rb4c2"]
 [ext_resource type="PackedScene" uid="uid://dro61sv4qfhvd" path="res://Scenes/Player/player.tscn" id="4_i7lkw"]
 [ext_resource type="PackedScene" uid="uid://juxhxwkh2e5o" path="res://Scenes/Levels/CopyCat/cc_pen.tscn" id="6_i7lkw"]
+[ext_resource type="PackedScene" uid="uid://cydpqbfsf6gqe" path="res://Scenes/Levels/RingToss/ring_tosser_player.tscn" id="6_qs5oi"]
 [ext_resource type="PackedScene" uid="uid://bqo333sarjbl7" path="res://Scenes/UserInterface/ui.tscn" id="6_rb4c2"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_k7yqj"]
@@ -39,9 +40,15 @@ mesh = SubResource("PlaneMesh_fem5o")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3835917, 2.3841858e-07, -5.020838)
 
 [node name="RingStand" parent="." instance=ExtResource("3_rb4c2")]
+transform = Transform3D(0.8177883, 0, 0.5755192, 0, 1, 0, -0.5755192, 0, 0.8177883, 8.159127, 9.536743e-07, -3.8682775)
+
+[node name="RingTosserPlayer" parent="RingStand" node_paths=PackedStringArray("stand", "pinhead") instance=ExtResource("6_qs5oi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13625336, 1.461895, 3.3377979)
+stand = NodePath("..")
+pinhead = NodePath("../Pinhead")
 
 [node name="CCPen" parent="." instance=ExtResource("6_i7lkw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.069784164, 0, 6.441803)
 
 [node name="Player" parent="." instance=ExtResource("4_i7lkw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3093204, 4.7683716e-07, 9.562495)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6715527, 4.7683716e-07, 0.48206806)

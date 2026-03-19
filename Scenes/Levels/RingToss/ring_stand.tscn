@@ -1,7 +1,10 @@
-[gd_scene load_steps=97 format=4 uid="uid://b5vll7kehv7s2"]
+[gd_scene load_steps=101 format=4 uid="uid://b5vll7kehv7s2"]
 
 [ext_resource type="PackedScene" uid="uid://b2hlu4il2fp0w" path="res://Scenes/Levels/RingToss/ring_target.tscn" id="1_j4h3v"]
 [ext_resource type="Texture2D" uid="uid://qmqruxssu63n" path="res://blends/SP0Sign.png" id="1_nqd4k"]
+[ext_resource type="Script" uid="uid://cxta54ntix01n" path="res://Scripts/RingToss/ring_stand.gd" id="1_u7k1b"]
+[ext_resource type="PackedScene" uid="uid://cn42sgj81veos" path="res://Scenes/General/interactable.tscn" id="3_l5u1l"]
+[ext_resource type="PackedScene" uid="uid://bditd87hlacqi" path="res://Scenes/Levels/RingToss/pinhead.tscn" id="5_iqode"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7j0p3"]
 resource_name = "Buttons.003"
@@ -2497,6 +2500,9 @@ size = Vector3(0.2, 2, 0.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_rs3vy"]
 size = Vector3(3.2, 1.575, 0.2)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4l5ig"]
+size = Vector3(3.2, 1.2928711, 0.2)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_585dr"]
 size = Vector3(3.2, 1.9625976, 0.2)
 
@@ -2509,6 +2515,7 @@ points = PackedVector3Array(1.09, 0.71, -0.56, 1.09, 0.71, -1.365, 1.09, 0, -0.5
 [node name="RingStand" type="StaticBody3D"]
 collision_layer = 16
 collision_mask = 15
+script = ExtResource("1_u7k1b")
 
 [node name="Targets" type="Node3D" parent="."]
 
@@ -2606,8 +2613,8 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.5
 shape = SubResource("BoxShape3D_rs3vy")
 
 [node name="ColSign3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.901, 1.589)
-shape = SubResource("BoxShape3D_rs3vy")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0420644, 1.589)
+shape = SubResource("BoxShape3D_4l5ig")
 
 [node name="ColWall" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9046422, -1.4171748)
@@ -2619,3 +2626,12 @@ shape = SubResource("BoxShape3D_jj4v0")
 
 [node name="ColBoard" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_4l5ig")
+
+[node name="Interactable" parent="." node_paths=PackedStringArray("owner_node") instance=ExtResource("3_l5u1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+owner_node = NodePath("..")
+message = "Play Ring Toss"
+radius = 4.0
+
+[node name="Pinhead" parent="." instance=ExtResource("5_iqode")]
+transform = Transform3D(0.80794877, 0, -0.58925277, 0, 1, 0, 0.58925277, 0, 0.80794877, 0.991, 0, 0.926)

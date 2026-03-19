@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=120
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://Audio/Busses/default_bus_layout.tres"
+
 [autoload]
 
 GameManager="*res://Singletons/game_manager.gd"
@@ -25,6 +29,7 @@ UiManager="*res://Singletons/ui_manager.gd"
 
 [display]
 
+window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 
 [input]

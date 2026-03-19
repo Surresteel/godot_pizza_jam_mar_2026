@@ -115,7 +115,6 @@ func _on_game_change(old: GameManager.GAME, new: GameManager.GAME) -> void:
 
 # Enables the player:
 func _enable_node() -> void:
-		print("none enabled")
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		self.process_mode = Node.PROCESS_MODE_INHERIT
 		self.visible = true
@@ -124,7 +123,6 @@ func _enable_node() -> void:
 
 # Disables the player:
 func _disable_node() -> void:
-		print("none disabled")
 		self.process_mode = Node.PROCESS_MODE_DISABLED
 		self.visible = false
 		camera.clear_current()

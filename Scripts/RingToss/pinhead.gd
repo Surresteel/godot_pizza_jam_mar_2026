@@ -1,22 +1,25 @@
 #===============================================================================
 #	CLASS PROPERTIES:
 #===============================================================================
-class_name RingTarget
-extends StaticBody3D
+class_name Pinhead
+extends CharacterBody3D
 
 
 #===============================================================================
 #	CLASS MEMBERS:
 #===============================================================================
-
+# SIGNALS:
 signal ring_on()
 signal ring_off()
 
-# GAME:
+
+# RING DETECTION:
+@onready var killzoneFwd: Area3D = \
+		$SP0RingTossUnfinished/Armature/Skeleton3D/BoneAttachment3D/KillzoneFwd
+@onready var killzoneAft: Area3D = \
+		$SP0RingTossUnfinished/Armature/Skeleton3D/BoneAttachment3D/KillzoneAft
 var contact_fwd: Node3D = null
 var contact_aft: Node3D = null
-@onready var area_fwd: Area3D = $AreaFwd
-@onready var area_aft: Area3D = $AreaAft
 var hit: bool = false
 
 
@@ -26,10 +29,10 @@ var hit: bool = false
 # Node initialisation:
 func _ready() -> void:
 	# Connect collision signals:
-	area_fwd.body_entered.connect(func(node): contact_fwd = node)
-	area_fwd.body_exited.connect(func(_node): contact_fwd = null)
-	area_aft.body_entered.connect(func(node): contact_aft = node)
-	area_aft.body_exited.connect(func(_node): contact_aft = null)
+	killzoneFwd.body_entered.connect(func(node): contact_fwd = node)
+	killzoneFwd.body_exited.connect(func(_node): contact_fwd = null)
+	killzoneAft.body_entered.connect(func(node): contact_aft = node)
+	killzoneAft.body_exited.connect(func(_node): contact_aft = null)
 
 
 # Node behaviour:
@@ -45,8 +48,3 @@ func _process(_delta: float) -> void:
 	if hit:
 		ring_off.emit()
 		hit = false
-
-
-#===============================================================================
-#	EOF:
-#===============================================================================

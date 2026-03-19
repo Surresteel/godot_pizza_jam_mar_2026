@@ -24,7 +24,10 @@ var pan_rate: float = 1.0
 @onready var cage_spawn: Node3D = $CCCage/Spawn
 @export var no_of_animals: int = 10
 @export var max_guesses: int = 3
+@export var max_time: int = 30000
 var cur_guess = 0
+var start_time: int = 0
+var cur_time: int = 0
 var _is_active: bool = false
 var _animals: Array[CCAnimal]
 var _original: CCAnimal = null
@@ -42,6 +45,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not _is_active:
 		return
+	
+	# Count down:
+	var now: int = Time.get_ticks_msec()
+	cur_time = now - start_time
+	if cur_time > max_time:
+		GameManager.switch_game(GameManager.GAME.NONE)
+	@warning_ignore("integer_division")
+	UiManager.set_timer((max_time - cur_time) / 1000)
 	
 	var pan_dir = _get_pan_dir()
 	if pan_dir != 0:
@@ -90,6 +101,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_win_game()
 		else:
 			cur_guess += 1
+			UiManager.set_guesses(max_guesses - cur_guess)
 		
 		if cur_guess == max_guesses:
 			_lose_game()
@@ -101,13 +113,12 @@ func _unhandled_input(event: InputEvent) -> void:
 #	FUNCTIONS - GAME:
 #===============================================================================
 func _win_game() -> void:
-	print("Copycat won!")
 	await get_tree().create_timer(2).timeout
 	GameManager.switch_game(GameManager.GAME.NONE)
 
 
 func _lose_game() -> void:
-	print("Copycat lost!")
+	GameManager.switch_game(GameManager.GAME.NONE)
 
 
 #===============================================================================
@@ -138,21 +149,19 @@ func _on_game_change(old: GameManager.GAME, new: GameManager.GAME) -> void:
 
 # Enables the game:
 func _enable_node() -> void:
-		print("copycat enabled")
-		_setup_game()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		interactable.monitorable = false
-		cam.make_current()
-		_is_active = true
+	_is_active = true
+	_setup_game()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	interactable.monitorable = false
+	cam.make_current()
 
 
 # Disables the game:
 func _disable_node() -> void:
-		print("copycat disabled")
-		_clean_up_game()
-		interactable.monitorable = true
-		cam.clear_current()
-		_is_active = false
+	_is_active = false
+	_clean_up_game()
+	interactable.monitorable = true
+	cam.clear_current()
 
 
 # Sets up the game:
@@ -168,10 +177,19 @@ func _setup_game() -> void:
 	_original.is_original = true
 	_original.randomise_traits()
 	
+	# Reset counters:
+	start_time = Time.get_ticks_msec()
+	cur_guess = 0
+	cur_time = 0
+	UiManager.set_guesses(max_guesses)
+	
 	# Spawn others:
 	var cc_idx: int = randi_range(0, no_of_animals - 1)
 	for i in range(no_of_animals):
-		var offset := Vector3(randf()*2-1, randf()*2-1, randf()*2-1)
+		if not _is_active:
+			return
+		
+		var offset := Vector3(randf()*2-1, 0, randf()*2-1)
 		var animal = animal_scene.instantiate()
 		get_tree().current_scene.add_child(animal)
 		animal.global_position = spawn.global_position + offset
@@ -180,7 +198,7 @@ func _setup_game() -> void:
 		else:
 			animal.randomise_traits()
 		_animals.append(animal)
-		#await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.1).timeout
 
 
 # Cleans up the game:
