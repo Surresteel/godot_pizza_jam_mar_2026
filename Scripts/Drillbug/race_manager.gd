@@ -6,7 +6,7 @@ extends Node3D
 @export var participating_bugs: Array[DrillBug]
 @onready var label_3d: Label3D = $Kiosk/Label3D
 
-var bet_amount: int = 100
+var bet_amount: int = 0
 var bug_betted_on: DrillBug
 
 func _ready() -> void:
@@ -20,14 +20,17 @@ func prepare_race() -> void:
 		
 		i += 1
 		
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(5).timeout
 	for bug in participating_bugs:
 		bug.start_race()
 
+func place_bet(amount: int, bug: DrillBug) -> void:
+	bet_amount = amount
+	bug_betted_on = bug
+
 func race_win(winning_bug: DrillBug) -> void:
 	if winning_bug == bug_betted_on:
-		#player.add_ticket(bet_amount * 2) #TODO add this
-		print("winner")
+		player.add_ticket(bet_amount * 2)
 	
 
 func _on_finish_line_body_entered(body: Node3D) -> void:

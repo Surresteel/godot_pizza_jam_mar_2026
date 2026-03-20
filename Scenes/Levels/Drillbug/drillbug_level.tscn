@@ -1,13 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://dq0n6aaje0c81"]
+[gd_scene load_steps=20 format=3 uid="uid://dq0n6aaje0c81"]
 
 [ext_resource type="Script" uid="uid://ded2om1dxwfpb" path="res://Scripts/Drillbug/drillbug_level.gd" id="1_de8gn"]
 [ext_resource type="PackedScene" uid="uid://4penuwelymmj" path="res://Scenes/Levels/Drillbug/drillbug.tscn" id="1_nrys8"]
 [ext_resource type="PackedScene" uid="uid://dc227a83pvug0" path="res://Scenes/Levels/Drillbug/Dirt Hurdle/dirt_hurdle.tscn" id="2_00mfa"]
 [ext_resource type="PackedScene" uid="uid://5ow4fd8i40k3" path="res://Scenes/Levels/Drillbug/waypoint.tscn" id="3_d5e05"]
 [ext_resource type="PackedScene" uid="uid://d0rq1131bhreh" path="res://Scenes/Levels/Drillbug/race_manager.tscn" id="4_g1v0l"]
-[ext_resource type="PackedScene" uid="uid://cn42sgj81veos" path="res://Scenes/General/interactable.tscn" id="5_psfgv"]
-[ext_resource type="PackedScene" uid="uid://dro61sv4qfhvd" path="res://Scenes/Player/player.tscn" id="6_psfgv"]
-[ext_resource type="PackedScene" uid="uid://bqo333sarjbl7" path="res://Scenes/UserInterface/ui.tscn" id="7_tgful"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_00mfa"]
 sky_top_color = Color(0.12941177, 0.14901961, 0.18039216, 1)
@@ -38,6 +35,39 @@ material = SubResource("StandardMaterial3D_bc41f")
 top_radius = 0.02
 bottom_radius = 0.02
 height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgful"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_de8gn"]
+material = SubResource("StandardMaterial3D_tgful")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jfgmb"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dl1mc"]
+material = SubResource("StandardMaterial3D_jfgmb")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rdkam"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_c57bh"]
+material = SubResource("StandardMaterial3D_rdkam")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g1v0l"]
+size = Vector3(1.5, 0.5, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g1v0l"]
+size = Vector3(0.1, 0.2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgful"]
 albedo_color = Color(0, 1, 0, 1)
@@ -110,23 +140,26 @@ transform = Transform3D(-0.38219953, 0, -0.92407984, 0, 1, 0, 0.92407984, 0, -0.
 
 [node name="Drillbug" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
 transform = Transform3D(0.7674663, 0, 0.6410871, 0, 1, 0, -0.6410871, 0, 0.7674663, 0.627735, 0, -2.304218)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10")]
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
 drillbugs = [NodePath("."), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4")]
 doped = true
 
+[node name="Camera3D" type="Camera3D" parent="Drillbug"]
+transform = Transform3D(0.99999183, -0.004363314, 3.474396e-06, 0, 0.0007962743, 0.9999997, -0.004363315, -0.9999915, 0.0007962678, 0.009, 0.803, -0.004)
+
 [node name="Drillbug2" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
 transform = Transform3D(0.7674663, 0, 0.6410871, 0, 1, 0, -0.6410871, 0, 0.7674663, 0.7004574, 0, -2.364965)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10")]
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
 drillbugs = [NodePath("../Drillbug"), NodePath("."), NodePath("../Drillbug3"), NodePath("../Drillbug4")]
 
 [node name="Drillbug3" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
 transform = Transform3D(0.7674663, 0, 0.6410871, 0, 1, 0, -0.6410871, 0, 0.7674663, 0.78026044, 0, -2.4316268)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10")]
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
 drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("."), NodePath("../Drillbug4")]
 
 [node name="Drillbug4" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
 transform = Transform3D(0.7674663, 0, 0.6410871, 0, 1, 0, -0.6410871, 0, 0.7674663, 0.8625621, 0, -2.500376)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6"), NodePath("../RACEPATH/7"), NodePath("../RACEPATH/8"), NodePath("../RACEPATH/9"), NodePath("../RACEPATH/10")]
+race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
 drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath(".")]
 
 [node name="RACEPATH" type="Node3D" parent="."]
@@ -134,7 +167,7 @@ drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Dri
 [node name="1" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4951077, 2.3841858e-07, 0.922595)
 next_waypoint = NodePath("../2")
-previous_waypoint = NodePath("../10")
+previous_waypoint = NodePath("../6")
 
 [node name="2" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.498804, -5.9604645e-08, -0.29433537)
@@ -157,29 +190,9 @@ next_waypoint = NodePath("../6")
 previous_waypoint = NodePath("../4")
 
 [node name="6" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.742599, 9.536743e-07, -3.3668623)
-next_waypoint = NodePath("../7")
-previous_waypoint = NodePath("../5")
-
-[node name="7" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.525899, -4.7683716e-07, -2.0951118)
-next_waypoint = NodePath("../8")
-previous_waypoint = NodePath("../6")
-
-[node name="8" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.906979, 0, 2.5001144)
-next_waypoint = NodePath("../9")
-previous_waypoint = NodePath("../7")
-
-[node name="9" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89428, 0, 4.2018013)
-next_waypoint = NodePath("../10")
-previous_waypoint = NodePath("../8")
-
-[node name="10" parent="RACEPATH" node_paths=PackedStringArray("next_waypoint", "previous_waypoint") instance=ExtResource("3_d5e05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7830062, 0, 1.6207874)
 next_waypoint = NodePath("../1")
-previous_waypoint = NodePath("../9")
+previous_waypoint = NodePath("../5")
 
 [node name="Race manager" parent="RACEPATH" node_paths=PackedStringArray("starting_positions", "participating_bugs") instance=ExtResource("4_g1v0l")]
 starting_positions = [NodePath("MeshInstance3D"), NodePath("MeshInstance3D2"), NodePath("MeshInstance3D3"), NodePath("MeshInstance3D4")]
@@ -219,20 +232,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14479491, 0.06218949)
 pixel_size = 0.001
 double_sided = false
 texture_filter = 0
-text = "BUG: 1"
+text = "< BUG: 1 >"
 uppercase = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/Race manager/Kiosk"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("BoxMesh_g1v0l")
-
-[node name="Interactable" parent="RACEPATH/Race manager/Kiosk" node_paths=PackedStringArray("owner_node") instance=ExtResource("5_psfgv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1192909, 0)
-owner_node = NodePath("..")
-message = "bet"
-radius = 0.2
-
-[node name="Player" parent="." instance=ExtResource("6_psfgv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7038193)
 
 [connection signal="body_entered" from="RACEPATH/Race manager/FinishLine" to="RACEPATH/Race manager" method="_on_finish_line_body_entered"]
