@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dq0n6aaje0c81"]
+[gd_scene load_steps=20 format=3 uid="uid://dq0n6aaje0c81"]
 
 [ext_resource type="PackedScene" uid="uid://4penuwelymmj" path="res://Scenes/Levels/Drillbug/drillbug.tscn" id="1_nrys8"]
 [ext_resource type="PackedScene" uid="uid://dc227a83pvug0" path="res://Scenes/Levels/Drillbug/Dirt Hurdle/dirt_hurdle.tscn" id="2_00mfa"]
@@ -62,6 +62,12 @@ top_radius = 0.02
 bottom_radius = 0.02
 height = 0.1
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_g1v0l"]
+size = Vector3(1.5, 0.5, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g1v0l"]
+size = Vector3(0.1, 0.2, 0.1)
+
 [node name="Drillbug Level" type="Node"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -94,308 +100,28 @@ transform = Transform3D(-0.9999872, 0, 0.005061388, 0, 1, 0, -0.005061388, 0, -0
 transform = Transform3D(0.045380518, 0, -0.99896973, 0, 1, 0, 0.99896973, 0, 0.045380518, -0.5224834, 0, 0.3644722)
 
 [node name="Drillbug" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, 0.13623679, 0, 1.4827812)
+transform = Transform3D(0.7674663, 0, 0.6410871, 0, 1, 0, -0.6410871, 0, 0.7674663, 0.627735, 0, -2.304218)
 race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("."), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
+drillbugs = [NodePath("."), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4")]
 doped = true
 
 [node name="Camera3D" type="Camera3D" parent="Drillbug"]
 transform = Transform3D(0.99999183, -0.004363314, 3.474396e-06, 0, 0.0007962743, 0.9999997, -0.004363315, -0.9999915, 0.0007962678, 0.009, 0.803, -0.004)
 
 [node name="Drillbug2" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, 0.25606883, 0, 3.1087065)
+transform = Transform3D(0.7674663, 0, 0.6410871, 0, 1, 0, -0.6410871, 0, 0.7674663, 0.7004574, 0, -2.364965)
 race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("."), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
+drillbugs = [NodePath("../Drillbug"), NodePath("."), NodePath("../Drillbug3"), NodePath("../Drillbug4")]
 
 [node name="Drillbug3" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, -0.0006278753, 0, 3.1087065)
+transform = Transform3D(0.7674663, 0, 0.6410871, 0, 1, 0, -0.6410871, 0, 0.7674663, 0.78026044, 0, -2.4316268)
 race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("."), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
+drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("."), NodePath("../Drillbug4")]
 
 [node name="Drillbug4" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(0.9999986, 0, 0, 0, 1, 0, 0, 0, 0.9999986, -0.11860055, 0, 3.1087065)
+transform = Transform3D(0.7674663, 0, 0.6410871, 0, 1, 0, -0.6410871, 0, 0.7674663, 0.8625621, 0, -2.500376)
 race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("."), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug5" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, 0.28712425, 0, -2.0956304)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("."), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug6" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, 0.31671283, 0, -2.350616)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("."), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug8" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, 0.3038268, 0, -2.2395682)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("."), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug7" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, 0.33031112, 0, -2.4678025)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("."), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug9" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.027586058, 0, -2.1321497)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("."), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug10" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, 0.0020025522, 0, -2.387135)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("."), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug11" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.01088348, 0, -2.2760873)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("."), NodePath("../Drillbug12")]
-
-[node name="Drillbug12" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, 0.015600815, 0, -2.5043216)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath(".")]
-
-[node name="Drillbug13" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.26902744, 0, -2.0956304)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("."), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug14" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.23943886, 0, -2.350616)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("."), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug15" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.25232488, 0, -2.2395682)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("."), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug16" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.22584057, 0, -2.4678025)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("."), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug17" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.58373773, 0, -2.1321497)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("."), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug18" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.55414915, 0, -2.387135)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("."), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug19" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.5670352, 0, -2.2760873)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("."), NodePath("../Drillbug12")]
-
-[node name="Drillbug20" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.5405509, 0, -2.5043216)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath(".")]
-
-[node name="Drillbug21" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.82712495, 0, -2.0956304)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("."), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug22" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.7975364, 0, -2.350616)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("."), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug23" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.81042236, 0, -2.2395682)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("."), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug24" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.78393805, 0, -2.4678025)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("."), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug25" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.1418352, 0, -2.1321497)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("."), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug26" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.1122466, 0, -2.387135)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("."), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug27" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.1251327, 0, -2.2760873)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("."), NodePath("../Drillbug12")]
-
-[node name="Drillbug28" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.0986483, 0, -2.5043216)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath(".")]
-
-[node name="Drillbug29" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.69125056, 0, -2.7039561)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("."), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug30" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.661662, 0, -2.9589417)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("."), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug31" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.674548, 0, -2.847894)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("."), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug32" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.64806366, 0, -3.0761282)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("."), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug33" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.0059608, 0, -2.7404754)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("."), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug34" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.97637224, 0, -2.9954607)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("."), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug35" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.9892583, 0, -2.884413)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("."), NodePath("../Drillbug12")]
-
-[node name="Drillbug36" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.9627739, 0, -3.1126473)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath(".")]
-
-[node name="Drillbug37" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, 0.23028326, 0, -1.4832261)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("."), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug38" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, 0.25987184, 0, -1.7382116)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("."), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug39" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, 0.24698585, 0, -1.6271639)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("."), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug40" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, 0.27347016, 0, -1.8553982)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("."), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug41" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.084427, 0, -1.5197453)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("."), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug42" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.05483842, 0, -1.7747307)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("."), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug43" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.06772447, 0, -1.6636829)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("."), NodePath("../Drillbug12")]
-
-[node name="Drillbug44" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.041240096, 0, -1.8919172)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath(".")]
-
-[node name="Drillbug45" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.15474725, 0, -2.6104712)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("."), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug46" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.12515867, 0, -2.8654568)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("."), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug47" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.13804466, 0, -2.754409)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("."), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug48" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.111560345, 0, -2.9826434)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("."), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug49" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.4694575, 0, -2.6469905)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("."), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug50" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.43986893, 0, -2.9019759)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("."), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug51" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.45275497, 0, -2.7909281)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("."), NodePath("../Drillbug12")]
-
-[node name="Drillbug52" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -0.4262706, 0, -3.0191624)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath(".")]
-
-[node name="Drillbug53" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.3544514, 0, -2.5596738)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("."), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug54" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.3248628, 0, -2.8146594)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("."), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug55" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.3377488, 0, -2.7036116)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("."), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug56" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.3112645, 0, -2.931846)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("."), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug57" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.6691617, 0, -2.596193)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("."), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug58" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.6395731, 0, -2.8511784)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("."), NodePath("../Drillbug11"), NodePath("../Drillbug12")]
-
-[node name="Drillbug59" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.6524591, 0, -2.7401307)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("."), NodePath("../Drillbug12")]
-
-[node name="Drillbug60" parent="." node_paths=PackedStringArray("race_waypoints", "drillbugs") instance=ExtResource("1_nrys8")]
-transform = Transform3D(-0.11526644, 0, -0.99333316, 0, 1, 0, 0.99333316, 0, -0.11526644, -1.6259748, 0, -2.968365)
-race_waypoints = [NodePath("../RACEPATH/1"), NodePath("../RACEPATH/2"), NodePath("../RACEPATH/3"), NodePath("../RACEPATH/4"), NodePath("../RACEPATH/5"), NodePath("../RACEPATH/6")]
-drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath("../Drillbug4"), NodePath("../Drillbug5"), NodePath("../Drillbug6"), NodePath("../Drillbug8"), NodePath("../Drillbug7"), NodePath("../Drillbug9"), NodePath("../Drillbug10"), NodePath("../Drillbug11"), NodePath(".")]
+drillbugs = [NodePath("../Drillbug"), NodePath("../Drillbug2"), NodePath("../Drillbug3"), NodePath(".")]
 
 [node name="RACEPATH" type="Node3D" parent="."]
 
@@ -448,3 +174,30 @@ mesh = SubResource("CylinderMesh_dl1mc")
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="RACEPATH/Race manager"]
 transform = Transform3D(0.7674674, 0, 0.641088, 0, 1, 0, -0.641088, 0, 0.7674674, 0.8625621, 0, -2.500376)
 mesh = SubResource("CylinderMesh_c57bh")
+
+[node name="FinishLine" type="Area3D" parent="RACEPATH/Race manager"]
+transform = Transform3D(0.124900274, 0, 0.99216926, 0, 1, 0, -0.99216926, 0, 0.124900274, 0.5001058, 0, -2.128936)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RACEPATH/Race manager/FinishLine"]
+shape = SubResource("BoxShape3D_g1v0l")
+debug_color = Color(5.0055983e-06, 0, 0.97148734, 1)
+
+[node name="Startingpoints" type="Node3D" parent="RACEPATH/Race manager"]
+
+[node name="Kiosk" type="Node3D" parent="RACEPATH/Race manager"]
+
+[node name="Label3D" type="Label3D" parent="RACEPATH/Race manager/Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14479491, 0.06218949)
+pixel_size = 0.001
+double_sided = false
+texture_filter = 0
+text = "< BUG: 1 >"
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RACEPATH/Race manager/Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_g1v0l")
+
+[connection signal="body_entered" from="RACEPATH/Race manager/FinishLine" to="RACEPATH/Race manager" method="_on_finish_line_body_entered"]
