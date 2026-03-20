@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://4penuwelymmj"]
+[gd_scene load_steps=14 format=4 uid="uid://4penuwelymmj"]
 
 [ext_resource type="Script" uid="uid://bhce50g228gyb" path="res://Scripts/Drillbug/drillbug.gd" id="1_ohqw3"]
 [ext_resource type="AnimationLibrary" uid="uid://1bxlfhwokjta" path="res://Scenes/Levels/Drillbug/drillbug animation library.res" id="2_0atag"]
@@ -468,3 +468,11 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04749272, 0)
 script = ExtResource("2_jipot")
 desired_seperation = 1.0
+
+[node name="Interactable" parent="." node_paths=PackedStringArray("owner_node") instance=ExtResource("4_33f77")]
+owner_node = NodePath("..")
+message = "Give Him The Drugs"
+radius = 0.1
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="activated" from="Interactable" to="." method="_dope_bug"]
