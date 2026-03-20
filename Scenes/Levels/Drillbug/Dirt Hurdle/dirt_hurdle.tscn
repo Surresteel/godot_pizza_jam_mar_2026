@@ -11,7 +11,7 @@ size = Vector3(0.3, 0.246, 0.20199585)
 
 [node name="Dirt Hurdle" type="StaticBody3D"]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("1_t0d6h")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

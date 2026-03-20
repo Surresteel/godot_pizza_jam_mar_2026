@@ -87,3 +87,8 @@ func _dope_bug() -> void:
 	aceleration += 1
 	max_speed = speed
 	steering_behaviour.set_defaults(max_speed,max_speed*0.5)
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "drillbug animation library/Drilling" and drilling:
+		animation_player.play("drillbug animation library/Drilling")

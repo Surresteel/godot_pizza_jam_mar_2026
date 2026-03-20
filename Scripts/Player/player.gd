@@ -29,7 +29,7 @@ var inv := PlayerInventory
 func _ready() -> void:
 	GameManager.game_change.connect(_on_game_change)
 	_disable_node()
-
+	GameManager.switch_game(GameManager.GAME.NONE)
 
 func _physics_process(delta: float) -> void:
 	#InputHandling
