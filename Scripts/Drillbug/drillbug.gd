@@ -5,7 +5,6 @@ class_name DrillBug
 @onready var steering_behaviour: SteeringBehaviour = $"Steering Behaviour"
 
 @export var race_waypoints: Array[WayPoint]
-var current_waypoint: int
 var length: float = 0.3 #arbitary length used for distance to points and steering behaviours
 @export var drillbugs: Array[DrillBug]
 
@@ -18,6 +17,8 @@ var aceleration:= 1.0
 var max_speed: float = 0.5
 
 @export var doped: bool = false
+
+var current_lap: int = 0
 
 func start_drilling() -> void:
 	animation_player.play("drillbug animation library/Drilling")
@@ -35,13 +36,12 @@ func start_race() -> void:
 	if race_waypoints.is_empty():
 		print("invalid waypoints")
 		return
-	current_waypoint = 0
+	current_lap = 0
 	racing = true
 	animation_player.play("drillbug animation library/Run")
 
 
 func _ready() -> void:
-	racing = true
 	speed = randf_range(0.75,1.5)
 	dig_speed = randf_range(0.5,1.75)
 	aceleration = randf_range(1,3)
