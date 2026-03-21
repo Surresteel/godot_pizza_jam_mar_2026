@@ -35,3 +35,8 @@ func _ready() -> void:
 # Activates the interactable:
 func activate() -> void:
 	activated.emit()
+
+
+# Toggles whether the interactable is interactable:
+func toggle(value: bool) -> void:
+	collider.set_deferred("disabled", !value)

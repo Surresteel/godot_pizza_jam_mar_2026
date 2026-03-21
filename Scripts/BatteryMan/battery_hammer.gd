@@ -58,6 +58,7 @@ func _process(delta: float) -> void:
 func _on_game_change(old: GameManager.GAME, new: GameManager.GAME) -> void:
 	if new == GameManager.GAME.HAMMER:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		get_viewport().warp_mouse(Vector2(700, 100))
 		self.process_mode = Node.PROCESS_MODE_INHERIT
 		self.visible = true
 		cam.make_current()

@@ -24,9 +24,12 @@ var _is_animating: bool = false
 
 # GAME:
 @onready var puck: Node3D = $StrengthTesterAnimations/Puck
+signal game_won(player_won: bool)
 const PUCK_MIN_Y: float = 0.624
 const PUCK_MAX_Y: float = 3.285
 const PUCK_DIST: float = PUCK_MAX_Y - PUCK_MIN_Y
+var last_player_hit: float = 0
+var has_player_won: bool = false
 
 
 #===============================================================================
@@ -64,14 +67,14 @@ func _on_body_entered(node: Node3D) -> void:
 	strength *= hammer.weight_multi
 	
 	# Set bar scale:
-	_animate_bar(strength)
+	_animate_bar(strength, 1.5, true)
 	
 	return
 
 
 # Called when batteryman hits the target:
 func batteryman_hit() -> void:
-	var strength: float = randf_range(0.9, 1.1)
+	var strength: float = randf_range(1.0, 1.1)
 	_animate_bar(strength)
 
 
@@ -83,7 +86,15 @@ func _play_anim(anim: String, blend: float = 1, play_spd: float = 1.0) -> void:
 
 
 # Animates the bar according to strength:
-func _animate_bar(strength: float, duration: float = 1.5):
+func _animate_bar(power: float, duration: float = 1.5, is_player: bool = false):
+	if is_player:
+		last_player_hit = power
+	elif power < last_player_hit:
+		has_player_won = true
+		game_won.emit(true)
+	else:
+		game_won.emit(false)
+	
 	# GATE - must not be animating:
 	if _is_animating:
 		return
@@ -94,10 +105,10 @@ func _animate_bar(strength: float, duration: float = 1.5):
 	
 	# Create grow tween:
 	var tween = create_tween()
-	tween.tween_property(bar, "scale", Vector3(1, strength, 1), duration/2)\
+	tween.tween_property(bar, "scale", Vector3(1, power, 1), duration/2)\
 			.set_trans(Tween.TRANS_QUAD)\
 			.set_ease(Tween.EASE_OUT)
-	var pos := PUCK_MIN_Y + PUCK_DIST * strength
+	var pos := PUCK_MIN_Y + PUCK_DIST * power
 	tween.parallel().tween_property(puck, "global_position:y", pos, duration/2)\
 			.set_trans(Tween.TRANS_QUAD)\
 			.set_ease(Tween.EASE_OUT)
@@ -112,12 +123,7 @@ func _animate_bar(strength: float, duration: float = 1.5):
 			.set_ease(Tween.EASE_IN)
 	
 	# Connect reset:
-	tween.finished.connect(_reset_animation)
-
-
-# Resets the _is_animating boolean:
-func _reset_animation() -> void:
-	_is_animating = false
+	tween.finished.connect(func(): _is_animating = false)
 
 
 #===============================================================================

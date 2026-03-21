@@ -27,6 +27,8 @@ var cur_state := STATE.IDLE
 @export var game: BatteryGame = null
 var game_ongoing: bool = false
 var state_change: bool = false
+var has_played: bool = false
+var has_won: bool = true
 
 # MOVEMENT:
 @export var speed: float = 2.0
@@ -39,10 +41,14 @@ var state_change: bool = false
 
 # Node initialisation:
 func _ready() -> void:
+	# Signal connections:
 	interactable.activated.connect(_activate_game)
 	GameManager.game_change.connect(_on_game_change)
-	cur_state = STATE.MOVE_IDLE
 	_anim_player.animation_finished.connect(_return_to_idle)
+	game.game_won.connect(func(p_won: bool): has_won = not p_won)
+	
+	# State initialisation:
+	cur_state = STATE.MOVE_IDLE
 	state_change = true
 
 
@@ -50,7 +56,13 @@ func _process(delta: float) -> void:
 	match cur_state:
 		STATE.IDLE:
 			if state_change:
-				_play_anim("HammerIdle")
+				if has_won or not has_played:
+					interactable.toggle(true)
+				if has_played and not has_won:
+					_play_anim("Lose")
+					_anim_player.queue("Angry Idle")
+				else:
+					_play_anim("HammerIdle")
 				global_basis = node_idle.global_basis
 				state_change = false
 		STATE.MOVE_GAME:
@@ -87,12 +99,17 @@ func _process(delta: float) -> void:
 #	FUNCTIONS - GAME:
 #===============================================================================
 
-func _on_game_change(old: GameManager.GAME, _new: GameManager.GAME) -> void:
+func _on_game_change(old: GameManager.GAME, new: GameManager.GAME) -> void:
 	# GATE - old game must be hammer game:
-	if old != GameManager.GAME.HAMMER:
-		return
+	if old == GameManager.GAME.HAMMER:
+		cur_state = STATE.MOVE_GAME
 	
-	cur_state = STATE.MOVE_GAME
+	if new == GameManager.GAME.HAMMER:
+		game.last_player_hit = 0.0
+		game.has_player_won = false
+		interactable.toggle(false)
+		if not has_played:
+			has_played = true
 	
 	return
 

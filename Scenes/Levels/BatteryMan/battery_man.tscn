@@ -270,6 +270,7 @@ shadow_mesh = SubResource("ArrayMesh_su35w")
 [sub_resource type="Animation" id="Animation_y3hky"]
 resource_name = "Angry Idle"
 length = 6.5
+loop_mode = 1
 tracks/0/type = "rotation_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -1764,3 +1765,4 @@ bus = &"SFX"
 [node name="Interactable" parent="." node_paths=PackedStringArray("owner_node") instance=ExtResource("2_y3hky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0501775, -1.2040844)
 owner_node = NodePath("..")
+message = "Play Batteryman Charger"

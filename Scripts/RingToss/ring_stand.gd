@@ -40,9 +40,9 @@ func _activate_game() -> void:
 # Handles node lifecycle as game state changes:
 func _on_game_change(old: GameManager.GAME, new: GameManager.GAME) -> void:
 	if new == GameManager.GAME.RING:
-		interactable.monitorable = false
+		interactable.toggle(false)
 	elif old == GameManager.GAME.RING:
-		interactable.monitorable = true
+		interactable.toggle(true)
 	return
 
 

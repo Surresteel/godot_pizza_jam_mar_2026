@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdfj4pia5q1xk"]
+[gd_scene load_steps=15 format=3 uid="uid://bdfj4pia5q1xk"]
 
 [ext_resource type="Texture2D" uid="uid://caymhtcwoo87c" path="res://Materials/Debug_Grid.png" id="1_bem8d"]
 [ext_resource type="Script" uid="uid://dri1djnoi3gf3" path="res://DEBUG/weather_test.gd" id="1_i7lkw"]
@@ -6,8 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://b5vll7kehv7s2" path="res://Scenes/Levels/RingToss/ring_stand.tscn" id="3_rb4c2"]
 [ext_resource type="PackedScene" uid="uid://dro61sv4qfhvd" path="res://Scenes/Player/player.tscn" id="4_i7lkw"]
 [ext_resource type="PackedScene" uid="uid://juxhxwkh2e5o" path="res://Scenes/Levels/CopyCat/cc_pen.tscn" id="6_i7lkw"]
+[ext_resource type="PackedScene" uid="uid://dk2r88inqymq8" path="res://Scenes/Levels/BatteryMan/battery_game.tscn" id="6_k7yqj"]
 [ext_resource type="PackedScene" uid="uid://cydpqbfsf6gqe" path="res://Scenes/Levels/RingToss/ring_tosser_player.tscn" id="6_qs5oi"]
 [ext_resource type="PackedScene" uid="uid://bqo333sarjbl7" path="res://Scenes/UserInterface/ui.tscn" id="6_rb4c2"]
+[ext_resource type="PackedScene" uid="uid://bu8i4o5dglrpt" path="res://Scenes/Levels/BatteryMan/battery_man.tscn" id="7_fem5o"]
+[ext_resource type="PackedScene" uid="uid://c70r8yywkxygv" path="res://Scenes/Levels/BatteryMan/battery_hammer.tscn" id="8_guev0"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_k7yqj"]
 map_width = 50
@@ -26,29 +29,55 @@ script = ExtResource("1_i7lkw")
 
 [node name="UI" parent="." instance=ExtResource("6_rb4c2")]
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Player" parent="." instance=ExtResource("4_i7lkw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6715527, 4.7683716e-07, 0.48206806)
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Environment"]
 collision_layer = 16
 collision_mask = 15
 
-[node name="ColFloor" type="CollisionShape3D" parent="Floor"]
+[node name="ColFloor" type="CollisionShape3D" parent="Environment/Floor"]
 shape = SubResource("HeightMapShape3D_k7yqj")
 
-[node name="MeshFloor" type="MeshInstance3D" parent="Floor"]
+[node name="MeshFloor" type="MeshInstance3D" parent="Environment/Floor"]
 mesh = SubResource("PlaneMesh_fem5o")
 
-[node name="OpioidModel" parent="Floor" instance=ExtResource("2_nsk6j")]
+[node name="OpioidModel" parent="Environment/Floor" instance=ExtResource("2_nsk6j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3835917, 2.3841858e-07, -5.020838)
 
-[node name="RingStand" parent="." instance=ExtResource("3_rb4c2")]
-transform = Transform3D(0.8177883, 0, 0.5755192, 0, 1, 0, -0.5755192, 0, 0.8177883, 8.159127, 9.536743e-07, -3.8682775)
+[node name="Games" type="Node3D" parent="."]
 
-[node name="RingTosserPlayer" parent="RingStand" node_paths=PackedStringArray("stand", "pinhead") instance=ExtResource("6_qs5oi")]
+[node name="Batteryman" type="Node3D" parent="Games"]
+
+[node name="BatteryGame" parent="Games/Batteryman" instance=ExtResource("6_k7yqj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.665442)
+
+[node name="BatteryMan" parent="Games/Batteryman" node_paths=PackedStringArray("node_game", "node_idle", "game") instance=ExtResource("7_fem5o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.227618, 4.7683716e-07, -12.865178)
+node_game = NodePath("../BatteryGame/PosBMHit")
+node_idle = NodePath("../BatteryGame/PosBMIdle")
+game = NodePath("../BatteryGame")
+
+[node name="BatteryHammer" parent="Games/Batteryman" node_paths=PackedStringArray("cam", "target", "alignPoint") instance=ExtResource("8_guev0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00838685, 2.0797434, -12.348492)
+cam = NodePath("../BatteryGame/Cam")
+target = NodePath("../BatteryGame/PosTarget")
+alignPoint = NodePath("../BatteryGame/PosCenter")
+
+[node name="Ringtoss" type="Node3D" parent="Games"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.069784164, 0, 6.441803)
+
+[node name="RingStand" parent="Games/Ringtoss" instance=ExtResource("3_rb4c2")]
+transform = Transform3D(0.8177883, 0, 0.5755192, 0, 1, 0, -0.5755192, 0, 0.8177883, 8.228911, 9.536743e-07, -10.310081)
+
+[node name="RingTosserPlayer" parent="Games/Ringtoss/RingStand" node_paths=PackedStringArray("stand", "pinhead") instance=ExtResource("6_qs5oi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13625336, 1.461895, 3.3377979)
 stand = NodePath("..")
 pinhead = NodePath("../Pinhead")
 
-[node name="CCPen" parent="." instance=ExtResource("6_i7lkw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.069784164, 0, 6.441803)
+[node name="Copycat" type="Node3D" parent="Games"]
 
-[node name="Player" parent="." instance=ExtResource("4_i7lkw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6715527, 4.7683716e-07, 0.48206806)
+[node name="CCPen" parent="Games/Copycat" instance=ExtResource("6_i7lkw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.069784164, 0, 6.441803)

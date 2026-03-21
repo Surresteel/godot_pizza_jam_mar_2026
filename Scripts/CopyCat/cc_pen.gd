@@ -152,7 +152,7 @@ func _enable_node() -> void:
 	_is_active = true
 	_setup_game()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	interactable.monitorable = false
+	interactable.toggle(false)
 	cam.make_current()
 
 
@@ -160,7 +160,7 @@ func _enable_node() -> void:
 func _disable_node() -> void:
 	_is_active = false
 	_clean_up_game()
-	interactable.monitorable = true
+	interactable.toggle(true)
 	cam.clear_current()
 
 

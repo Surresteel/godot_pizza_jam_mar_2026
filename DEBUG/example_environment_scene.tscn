@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://0071fvu8fped"]
+
+[ext_resource type="PackedScene" uid="uid://cvj7amj7c6kdn" path="res://blends/MiscAssets01.blend" id="1_dulim"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qn5cx"]
+sky_top_color = Color(0.49334383, 0.3997801, 0.6026082, 1)
+sky_horizon_color = Color(0.79614776, 0.5934018, 0.61519367, 1)
+sky_curve = 0.24367556
+ground_bottom_color = Color(0.2059705, 0.21465528, 0.2791291, 1)
+ground_horizon_color = Color(0.79607844, 0.5921569, 0.6156863, 1)
+sun_angle_max = 35.0
+sun_curve = 0.086152464
+
+[sub_resource type="Sky" id="Sky_u0cns"]
+sky_material = SubResource("ProceduralSkyMaterial_qn5cx")
+
+[sub_resource type="Environment" id="Environment_jdicf"]
+background_mode = 2
+sky = SubResource("Sky_u0cns")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw6dw"]
+albedo_color = Color(0.23420268, 0.43390766, 0.28585133, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_evmoj"]
+material = SubResource("StandardMaterial3D_pw6dw")
+size = Vector2(30, 30)
+
+[node name="EnvironmentScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jdicf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99198955, 0.12632018, 0, -0.12632018, 0.99198955, 0, 0, 0)
+light_color = Color(1, 0.7416667, 0.5, 1)
+light_energy = 0.7
+light_specular = 0.7
+shadow_enabled = true
+
+[node name="MiscAssets01" parent="." instance=ExtResource("1_dulim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.643778, 0, 0)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_evmoj")
