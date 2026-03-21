@@ -21,12 +21,16 @@ var switch_timeout: int = 0
 
 # Initialise node:
 func _ready() -> void:
-	area.body_entered.connect(_on_body_entered)
-	add_to_group("turtles")
+	_setup()
 
 
 # Update node:
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		_dampen_movement(delta)
+		move_and_slide()
+		return
+	
 	if not target or Time.get_ticks_msec() > switch_timeout:
 		_update_target()
 	

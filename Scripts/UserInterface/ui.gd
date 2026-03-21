@@ -36,7 +36,6 @@ var _col_power_high := Color.GREEN
 func _ready() -> void:
 	GameManager.game_change.connect(_on_game_change)
 	WeatherManager.weather_change.connect(_on_weather_changed)
-	pass
 
 
 # Trigger fade out / in on weather change:

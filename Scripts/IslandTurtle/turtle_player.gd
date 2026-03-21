@@ -19,12 +19,16 @@ var mouse_intercept := Vector3.ZERO
 
 # Initialise node:
 func _ready() -> void:
-	area.body_entered.connect(_on_body_entered)
-	add_to_group("turtles")
+	_setup()
 
 
 # Update node:
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		_dampen_movement(delta)
+		move_and_slide()
+		return
+	
 	_update_mouse_intercept()
 	_update_direction(delta)
 	_update_velocity(delta)

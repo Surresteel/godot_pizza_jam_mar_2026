@@ -92,6 +92,7 @@ func _animate_bar(power: float, duration: float = 1.5, is_player: bool = false):
 	elif power < last_player_hit:
 		has_player_won = true
 		game_won.emit(true)
+		# TODO: GIVE PLAYER THE MAP SEGMENT:
 	else:
 		game_won.emit(false)
 	

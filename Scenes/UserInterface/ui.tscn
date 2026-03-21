@@ -13,7 +13,6 @@ outline_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
 script = ExtResource("1_l84sa")
 
 [node name="FadeOut" type="ColorRect" parent="."]
-visible = false
 z_index = 100
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,6 +94,7 @@ pivot_offset = Vector2(0, 40)
 mouse_filter = 2
 
 [node name="GameUICopycat" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

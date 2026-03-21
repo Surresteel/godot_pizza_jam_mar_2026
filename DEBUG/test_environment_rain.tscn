@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bdfj4pia5q1xk"]
+[gd_scene load_steps=17 format=3 uid="uid://bdfj4pia5q1xk"]
 
 [ext_resource type="Texture2D" uid="uid://caymhtcwoo87c" path="res://Materials/Debug_Grid.png" id="1_bem8d"]
 [ext_resource type="Script" uid="uid://dri1djnoi3gf3" path="res://DEBUG/weather_test.gd" id="1_i7lkw"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bqo333sarjbl7" path="res://Scenes/UserInterface/ui.tscn" id="6_rb4c2"]
 [ext_resource type="PackedScene" uid="uid://bu8i4o5dglrpt" path="res://Scenes/Levels/BatteryMan/battery_man.tscn" id="7_fem5o"]
 [ext_resource type="PackedScene" uid="uid://c70r8yywkxygv" path="res://Scenes/Levels/BatteryMan/battery_hammer.tscn" id="8_guev0"]
+[ext_resource type="PackedScene" uid="uid://cbnpba0c4l55d" path="res://Scenes/Levels/IslandTurtle/island_mesh.tscn" id="12_fem5o"]
+[ext_resource type="PackedScene" uid="uid://b43goetlbwpgk" path="res://Scenes/General/WeatherForecast/weather_sign.tscn" id="13_guev0"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_k7yqj"]
 map_width = 50
@@ -30,7 +32,7 @@ script = ExtResource("1_i7lkw")
 [node name="UI" parent="." instance=ExtResource("6_rb4c2")]
 
 [node name="Player" parent="." instance=ExtResource("4_i7lkw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6715527, 4.7683716e-07, 0.48206806)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.114546, 4.7683716e-07, 0.20831728)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -81,3 +83,13 @@ pinhead = NodePath("../Pinhead")
 
 [node name="CCPen" parent="Games/Copycat" instance=ExtResource("6_i7lkw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.069784164, 0, 6.441803)
+
+[node name="IslandTurtle" type="Node3D" parent="Games"]
+
+[node name="TurtleIsland" parent="Games/IslandTurtle" instance=ExtResource("12_fem5o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.373715, 4.7683716e-07, -5.943323)
+
+[node name="Common" type="Node3D" parent="."]
+
+[node name="WeatherSign" parent="Common" instance=ExtResource("13_guev0")]
+transform = Transform3D(-0.4114825, 0, -0.91141766, 0, 1, 0, 0.91141766, 0, -0.4114825, 7.7284102, 0, 3.4891858)

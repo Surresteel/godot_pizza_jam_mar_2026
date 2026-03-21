@@ -8,9 +8,16 @@ extends CharacterBody3D
 #===============================================================================
 #	CLASS MEMBERS:
 #===============================================================================
+# ANIMATION:
+@onready var _anim_player: AnimationPlayer = \
+		$TurtleRigged/AnimationPlayer
 
 # IDENTITY:
 @export var turtle_name: String = ""
+@export var colour := Color.RED
+
+# MATERIAL:
+@onready var shell: MeshInstance3D = $TurtleRigged/Armature/Skeleton3D/Turtle
 
 # AUDIO:
 const SFX_HIT: AudioStreamWAV = preload("uid://cp7o3rcewyn7a")
@@ -28,11 +35,15 @@ var turn_rate: float = 3.0
 var acceleration: float = 1.5
 var speed: float = 0.5
 
+# GAMEPLAY:
+var is_dead: bool = false
+var hit_rand_max: float = 1.2
+var hit_rand_min: float = 0.8
+
 
 #===============================================================================
 #	FUNCTIONS - MOVEMENT:
 #===============================================================================
-
 # Applies gravity to the turtle:
 func _apply_gravity(delta: float) -> void:
 	# GATE - Turtle must be in air:
@@ -102,9 +113,33 @@ func _apply_pending_collision() -> void:
 
 
 #===============================================================================
+#	FUNCTIONS - GAMEPLAY:
+#===============================================================================
+func _setup() -> void:
+	area.body_entered.connect(_on_body_entered)
+	
+	# Set turtle colour:
+	var mat: StandardMaterial3D = shell.get_active_material(0)
+	mat.albedo_color = colour
+	
+	# Start animation:
+	_anim_player.animation_finished.connect(_queue_walk)
+	_play_anim("Walk", 1.0, 5.0)
+
+
+func kill() -> void:
+	is_dead = true
+	remove_from_group("turtles")
+	_anim_player.play("Flipped", 1, 1)
+
+
+func won() -> void:
+	_anim_player.play("Victory", 1, 1)
+
+
+#===============================================================================
 #	FUNCTIONS - COLLISION:
 #===============================================================================
-
 # Processes collisions with other turtles:
 func _on_body_entered(other_node: Node3D) -> void:
 	# GATE - detected node must not be self:
@@ -132,11 +167,13 @@ func _on_body_entered(other_node: Node3D) -> void:
 	impulse_magnitude /= (1 / mass + 1 / other_mass)
 	
 	# Apply force:
-	var impulse_vector = impulse_magnitude * normal * 2.0
+	var rand_mod = randf_range(hit_rand_min, hit_rand_max)
+	var impulse_vector = impulse_magnitude * normal * 2.0 * rand_mod
 	pending_collision = impulse_vector / mass
 	
-	# Play sound:
+	# Play sound and animation:
 	_play_audio(SFX_HIT)
+	_play_anim("Hit")
 	
 	return
 
@@ -144,10 +181,16 @@ func _on_body_entered(other_node: Node3D) -> void:
 #===============================================================================
 #	FUNCTIONS - ANIMATIONS:
 #===============================================================================
-# TODO: Add animations:
-#func _play_anim(anim: String, blend: float = 1, speed: float = 1.0) -> void:
-	#_anim_player.play(anim, blend, speed)
-	#_anim_player.queue("Swimming")
+func _play_anim(anim: String, blend: float = 1, play_spd: float = 1.0) -> void:
+	_anim_player.play(anim, blend, play_spd)
+	#_anim_player.queue("Walk")
+
+
+func _queue_walk(_anim: String) -> void:
+	if is_dead:
+		return
+	
+	_play_anim("Walk", 1.0, 5.0)
 
 
 #===============================================================================
