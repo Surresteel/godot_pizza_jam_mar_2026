@@ -10,14 +10,19 @@ extends CharacterBody3D
 #===============================================================================
 # SIGNALS:
 signal ring_on()
-signal ring_off()
+#signal ring_off()
+
+
+# ANIMATION:
+@onready var _anim_player: AnimationPlayer = \
+		$SP0RingTossAnimations/AnimationPlayer
 
 
 # RING DETECTION:
 @onready var killzoneFwd: Area3D = \
-		$SP0RingTossUnfinished/Armature/Skeleton3D/BoneAttachment3D/KillzoneFwd
+		$SP0RingTossAnimations/Armature/Skeleton3D/BoneAttachment3D/KillzoneFwd
 @onready var killzoneAft: Area3D = \
-		$SP0RingTossUnfinished/Armature/Skeleton3D/BoneAttachment3D/KillzoneAft
+		$SP0RingTossAnimations/Armature/Skeleton3D/BoneAttachment3D/KillzoneAft
 var contact_fwd: Node3D = null
 var contact_aft: Node3D = null
 var hit: bool = false
@@ -33,6 +38,7 @@ func _ready() -> void:
 	killzoneFwd.body_exited.connect(func(_node): contact_fwd = null)
 	killzoneAft.body_entered.connect(func(node): contact_aft = node)
 	killzoneAft.body_exited.connect(func(_node): contact_aft = null)
+	_play_anim("Idle")
 
 
 # Node behaviour:
@@ -41,10 +47,15 @@ func _process(_delta: float) -> void:
 		if not hit:
 			hit = true
 			ring_on.emit()
+			_play_anim("RingHit")
 			return
 		else:
 			return
-	
-	if hit:
-		ring_off.emit()
-		hit = false
+
+
+#===============================================================================
+#	ANIMATIONS:
+#===============================================================================
+func _play_anim(anim: String, blend: float = 1, play_spd: float = 1.0) -> void:
+	_anim_player.play(anim, blend, play_spd)
+	#_anim_player.queue("Idle")

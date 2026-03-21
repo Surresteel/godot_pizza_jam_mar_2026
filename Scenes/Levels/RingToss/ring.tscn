@@ -1,8 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://wtoyj5gndted"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0hdj6"]
-friction = 0.1
-bounce = 0.5
+[gd_scene load_steps=5 format=4 uid="uid://wtoyj5gndted"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ororo"]
 resource_name = "Material.001"
@@ -187,7 +183,6 @@ points = PackedVector3Array(0.143, 0.027, -0.06, 0.143, 0.027, 0.06, 0.092, 0.02
 [node name="Ring" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 30
-physics_material_override = SubResource("PhysicsMaterial_0hdj6")
 continuous_cd = true
 
 [node name="Ring" type="MeshInstance3D" parent="."]

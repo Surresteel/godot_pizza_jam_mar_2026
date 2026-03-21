@@ -13,6 +13,7 @@ extends StaticBody3D
 @onready var tgt_base: Node3D = $Targets
 
 # GAME
+@export var player: RingTosserplayer = null
 signal game_won()
 @export var req_hits: int = 5
 var ring_tally: int = 0
@@ -42,7 +43,8 @@ func _on_game_change(old: GameManager.GAME, new: GameManager.GAME) -> void:
 	if new == GameManager.GAME.RING:
 		interactable.toggle(false)
 	elif old == GameManager.GAME.RING:
-		interactable.toggle(true)
+		if not player.has_won:
+			interactable.toggle(true)
 	return
 
 

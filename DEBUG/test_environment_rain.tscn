@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bdfj4pia5q1xk"]
+[gd_scene load_steps=18 format=3 uid="uid://bdfj4pia5q1xk"]
 
 [ext_resource type="Texture2D" uid="uid://caymhtcwoo87c" path="res://Materials/Debug_Grid.png" id="1_bem8d"]
 [ext_resource type="Script" uid="uid://dri1djnoi3gf3" path="res://DEBUG/weather_test.gd" id="1_i7lkw"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c70r8yywkxygv" path="res://Scenes/Levels/BatteryMan/battery_hammer.tscn" id="8_guev0"]
 [ext_resource type="PackedScene" uid="uid://cbnpba0c4l55d" path="res://Scenes/Levels/IslandTurtle/island_mesh.tscn" id="12_fem5o"]
 [ext_resource type="PackedScene" uid="uid://b43goetlbwpgk" path="res://Scenes/General/WeatherForecast/weather_sign.tscn" id="13_guev0"]
+[ext_resource type="PackedScene" uid="uid://btooj1njp1xww" path="res://Scenes/Levels/TimeGoddess/time_goddess.tscn" id="14_cbts0"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_k7yqj"]
 map_width = 50
@@ -71,8 +72,9 @@ alignPoint = NodePath("../BatteryGame/PosCenter")
 [node name="Ringtoss" type="Node3D" parent="Games"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.069784164, 0, 6.441803)
 
-[node name="RingStand" parent="Games/Ringtoss" instance=ExtResource("3_rb4c2")]
+[node name="RingStand" parent="Games/Ringtoss" node_paths=PackedStringArray("player") instance=ExtResource("3_rb4c2")]
 transform = Transform3D(0.8177883, 0, 0.5755192, 0, 1, 0, -0.5755192, 0, 0.8177883, 8.228911, 9.536743e-07, -10.310081)
+player = NodePath("RingTosserPlayer")
 
 [node name="RingTosserPlayer" parent="Games/Ringtoss/RingStand" node_paths=PackedStringArray("stand", "pinhead") instance=ExtResource("6_qs5oi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13625336, 1.461895, 3.3377979)
@@ -93,3 +95,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.373715, 4.7683716e-07, -5.
 
 [node name="WeatherSign" parent="Common" instance=ExtResource("13_guev0")]
 transform = Transform3D(-0.4114825, 0, -0.91141766, 0, 1, 0, 0.91141766, 0, -0.4114825, 7.7284102, 0, 3.4891858)
+
+[node name="TimeGoddess" parent="Common" instance=ExtResource("14_cbts0")]
+transform = Transform3D(-0.55084497, 0, 0.8346076, 0, 1, 0, -0.8346076, 0, -0.55084497, -10.125366, 4.7683716e-07, 3.5833025)

@@ -127,6 +127,14 @@ func _setup() -> void:
 	_play_anim("Walk", 1.0, 5.0)
 
 
+func reset() -> void:
+	add_to_group("turtles")
+	is_dead = false
+	visible = true
+	process_mode = Node.PROCESS_MODE_INHERIT
+	_play_anim("Walk", 1.0, 5.0)
+
+
 func kill() -> void:
 	is_dead = true
 	remove_from_group("turtles")

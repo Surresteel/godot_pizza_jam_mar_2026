@@ -27,7 +27,7 @@ var charging: bool = false
 var charge: float = 0.0
 var _max_throws: int = 5
 var _cur_throw: int = 0
-var _has_won = false;
+var has_won = false;
 
 
 #===============================================================================
@@ -71,7 +71,7 @@ func _on_game_change(old: GameManager.GAME, new: GameManager.GAME) -> void:
 # Enables the game:
 func _enable_node() -> void:
 	_cur_throw = 0
-	_has_won = false
+	has_won = false
 	self.visible = true
 	self.process_mode = Node.PROCESS_MODE_INHERIT
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -88,6 +88,11 @@ func _disable_node() -> void:
 	#self.set_process_input(false)
 	cam.clear_current()
 	
+	if has_won:
+		if _rings.size() > 0:
+			_rings[_rings.size()-1].queue_free()
+		return
+	
 	# Clean up rings:
 	for ring in _rings:
 		if ring:
@@ -98,6 +103,7 @@ func _disable_node() -> void:
 
 
 func _game_won() -> void:
+	has_won = true
 	print("Game won")
 	GameManager.switch_game(GameManager.GAME.NONE)
 
@@ -162,7 +168,7 @@ func _throw_ring() -> void:
 	UiManager.set_ring_count(_max_throws - _cur_throw, _max_throws)
 	
 	# Timeout and get new ring, or exit if max throws reached:
-	if _cur_throw == _max_throws and not _has_won:
+	if _cur_throw == _max_throws and not has_won:
 		await get_tree().create_timer(2).timeout
 		_game_lose()
 	else:
@@ -196,7 +202,7 @@ func _get_new_ring() -> void:
 
 func _on_pinhead_restrained() -> void:
 	print("Pinhead dead!")
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(4).timeout
 	_game_won()
 
 

@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://cw58ajifadxqd"]
+
+[ext_resource type="Script" uid="uid://dwcqgkcyy7qp1" path="res://Materials/Particles/poof.gd" id="1_m1qf2"]
+
+[sub_resource type="Curve" id="Curve_hrm6d"]
+_data = [Vector2(0, 0), 0.0, 18.337082, 0, 0, Vector2(0.1764706, 1), 0.029386342, 0.029386342, 0, 0, Vector2(1, 0), -2.4353926, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_m1qf2"]
+curve = SubResource("Curve_hrm6d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v71rm"]
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_sphere_radius = 1.5
+gravity = Vector3(0, 0.1, 0)
+scale_min = 0.099999994
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_m1qf2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kfyr3"]
+albedo_color = Color(0.86589026, 0.7082347, 0.30373478, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_t5hf1"]
+material = SubResource("StandardMaterial3D_kfyr3")
+radius = 0.1
+height = 0.2
+
+[node name="FortuneSparks" type="GPUParticles3D"]
+emitting = false
+amount = 50
+lifetime = 10.0
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_v71rm")
+draw_pass_1 = SubResource("SphereMesh_t5hf1")
+script = ExtResource("1_m1qf2")

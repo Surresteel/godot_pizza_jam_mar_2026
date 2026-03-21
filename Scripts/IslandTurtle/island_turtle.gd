@@ -79,10 +79,7 @@ func _start_game() -> void:
 	# Enable Turtles:
 	for turtle in turtles:
 		if turtle:
-			turtle.add_to_group("turtles")
-			turtle.visible = true
-			turtle.process_mode = Node.PROCESS_MODE_INHERIT
-
+			turtle.reset()
 
 # Ends the game:
 func _end_game() -> void:
