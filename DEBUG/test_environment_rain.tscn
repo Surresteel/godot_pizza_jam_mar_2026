@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bdfj4pia5q1xk"]
+[gd_scene load_steps=19 format=3 uid="uid://bdfj4pia5q1xk"]
 
 [ext_resource type="Texture2D" uid="uid://caymhtcwoo87c" path="res://Materials/Debug_Grid.png" id="1_bem8d"]
 [ext_resource type="Script" uid="uid://dri1djnoi3gf3" path="res://DEBUG/weather_test.gd" id="1_i7lkw"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cbnpba0c4l55d" path="res://Scenes/Levels/IslandTurtle/island_mesh.tscn" id="12_fem5o"]
 [ext_resource type="PackedScene" uid="uid://b43goetlbwpgk" path="res://Scenes/General/WeatherForecast/weather_sign.tscn" id="13_guev0"]
 [ext_resource type="PackedScene" uid="uid://btooj1njp1xww" path="res://Scenes/Levels/TimeGoddess/time_goddess.tscn" id="14_cbts0"]
+[ext_resource type="PackedScene" uid="uid://b2yaieqk8qxu8" path="res://Scenes/Levels/Band/band_stage.tscn" id="15_7o6vs"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_k7yqj"]
 map_width = 50
@@ -98,3 +99,6 @@ transform = Transform3D(-0.4114825, 0, -0.91141766, 0, 1, 0, 0.91141766, 0, -0.4
 
 [node name="TimeGoddess" parent="Common" instance=ExtResource("14_cbts0")]
 transform = Transform3D(-0.55084497, 0, 0.8346076, 0, 1, 0, -0.8346076, 0, -0.55084497, -10.125366, 4.7683716e-07, 3.5833025)
+
+[node name="BandStage" parent="Common" instance=ExtResource("15_7o6vs")]
+transform = Transform3D(0.83376056, 0, 0.55212617, 0, 1, 0, -0.55212617, 0, 0.83376056, 14.398667, 0, 16.710176)

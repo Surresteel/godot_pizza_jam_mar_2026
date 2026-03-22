@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2yaieqk8qxu8"]
+
+[ext_resource type="Script" uid="uid://bfykw4ioa1exv" path="res://Scripts/Band/band_stage.gd" id="1_ks3qg"]
+[ext_resource type="PackedScene" uid="uid://qydntobjc7by" path="res://blends/BandStage.blend" id="1_kv8k8"]
+[ext_resource type="PackedScene" uid="uid://cn42sgj81veos" path="res://Scenes/General/interactable.tscn" id="3_hbiba"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ks3qg"]
+size = Vector3(2.396, 1, 2.719)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hbiba"]
+size = Vector3(8.35, 1.79, 5.015)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_owrfa"]
+size = Vector3(0.282, 3.1, 0.291)
+
+[node name="BandStage" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 15
+script = ExtResource("1_ks3qg")
+
+[node name="BandStage" parent="." instance=ExtResource("1_kv8k8")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="ColStairs" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7512641, -0.6600016, 0, 0.6600016, 0.7512641, -1.85, 0.514, 3.211)
+shape = SubResource("BoxShape3D_ks3qg")
+
+[node name="ColBase" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8970895, 0)
+shape = SubResource("BoxShape3D_hbiba")
+
+[node name="ColBeam" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.34568, 0)
+shape = SubResource("BoxShape3D_owrfa")
+
+[node name="ColBeam2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.911487, 3.34568, 0)
+shape = SubResource("BoxShape3D_owrfa")
+
+[node name="ColBeam3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9109192, 3.34568, 0)
+shape = SubResource("BoxShape3D_owrfa")
+
+[node name="AudioStream" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.789606, 0)
+volume_db = -3.0
+unit_size = 30.0
+bus = &"Music"
+emission_angle_degrees = 90.0
+attenuation_filter_cutoff_hz = 8000.0
+attenuation_filter_db = -6.0
+
+[node name="Interactable" parent="." node_paths=PackedStringArray("owner_node") instance=ExtResource("3_hbiba")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9697325, 0)
+owner_node = NodePath("..")
+message = "Next Song"
+radius = 3.0
