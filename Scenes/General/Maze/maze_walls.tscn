@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://dns1775ettv0j"]
+
+[ext_resource type="PackedScene" uid="uid://tqsx5qlw0167" path="res://Models/MazeWalls.blend" id="1_1i1m3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qudtf"]
+size = Vector3(2, 3.5, 0.55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7rhnc"]
+size = Vector3(1, 3.5, 0.55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ieuf5"]
+size = Vector3(0.55, 3.5, 1.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c8sq4"]
+size = Vector3(2, 3.5, 0.55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n2gqk"]
+size = Vector3(2, 3.5, 0.55)
+
+[node name="MazeWalls" instance=ExtResource("1_1i1m3")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MazeWallStraight01" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MazeWallStraight01/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026632309, 1.7358341, 0.04206437)
+shape = SubResource("BoxShape3D_qudtf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MazeWallCorner" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MazeWallCorner/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50550985, 1.7303977, 0.01588142)
+shape = SubResource("BoxShape3D_7rhnc")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="MazeWallCorner/StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045069695, 1.7270175, 0.39315355)
+shape = SubResource("BoxShape3D_ieuf5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MazeWallStraight02" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MazeWallStraight02/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7120727, 0)
+shape = SubResource("BoxShape3D_c8sq4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MazeWallStraight03" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MazeWallStraight03/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7157062, 0)
+shape = SubResource("BoxShape3D_n2gqk")
+
+[node name="Hedge" parent="." index="4"]
+visible = false
+
+[node name="Hedge_001" parent="." index="5"]
+visible = false
